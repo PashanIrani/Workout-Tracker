@@ -7,9 +7,9 @@ class App extends Component{
     return(
         <div className="App">
           <h1>Workout Tracker 💪</h1>
-            <TopNav/>
             <Outlet />
         </div>
+        
     );
   }
 }
