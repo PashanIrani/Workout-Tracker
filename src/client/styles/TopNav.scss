@@ -1,24 +1,26 @@
+@use 'Colors';
+
 #topNav {
-    background-color: #fddcbc !important;
+    background-color: Colors.$primary-color !important;
     margin-top: 0vh !important; 
-    color:#44485a !important;
+    color: Colors.$secondary-color !important;
 }
 
 #dropdown-right{
     background-color: transparent;
-    color:#1b1e30;
-    border-color: #44485a;
+    color: Colors.$background-color;
+    border-color: Colors.$secondary-color;
     margin-left: 4vh;
 }
 
 a.dropdown-item:hover{
-    background-color: #fddcbc;
-    color:#44485a;
+    background-color: Colors.$primary-color;
+    color: Colors.$secondary-color;
 }
 
 .dropdown-menu{
     padding: 0;
-    background-color: #44485a;
+    background-color: Colors.$secondary-color;
     border: 1px solid rgba(255,255,255,.5);
     border-radius: .25rem;
 }
@@ -27,12 +29,12 @@ a.dropdown-item:hover{
     margin-left: 2vh;
     margin-right: 2vh;
     text-align: center;
-    color:#44485a;
+    color: Colors.$secondary-color;
 
 }
 
 .dropdown-item{
-    background-color: #1b1e30;
+    background-color: Colors.$background-color;
     color: rgba(255,255,255,.5);
     text-align: left;
     padding-top:10px;
