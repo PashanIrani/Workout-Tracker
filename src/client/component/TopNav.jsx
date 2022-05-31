@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Navbar, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import '../styles/TopNav.css'
+import '../styles/TopNav.scss'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaUser, FaSignOutAlt } from 'react-icons/fa';
 

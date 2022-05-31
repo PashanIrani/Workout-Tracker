@@ -1,19 +1,20 @@
+@use 'Colors';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html {
-  background-color: #1b1e30;
+  background-color: Colors.$background-color;
 }
+
 .App {
   font-family: 'Roboto', sans-serif;
-  color: #1b1e30;
-  background-color: #1b1e30;
+  background-color: Colors.$background-color;
   min-height: 91vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(5px + 2vmin);
-  color: white;
+  color: Colors.$text-color;
   margin-top: 70px;
 }
 
