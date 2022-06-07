@@ -5,16 +5,17 @@ html {
   background-color: Colors.$background-color;
 }
 
-.App {
+.Page {
   font-family: 'Roboto', sans-serif;
   background-color: Colors.$background-color;
   min-height: 91vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(5px + 2vmin);
   color: Colors.$text-color;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
+input[type="text"] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid Colors.$secondary-color;
+  color: Colors.$text-color;
+}
