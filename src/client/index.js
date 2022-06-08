@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import App from "./pages/App.js";
-import AddWorkout from "./component/AddWorkout.jsx";
+import App from "./pages/App.jsx";
+import AddWorkout from "./pages/AddWorkout.jsx";
 import TopNav from "./component/TopNav.jsx";
 const root = ReactDOM.createRoot(
     document.getElementById("root")

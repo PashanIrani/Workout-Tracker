@@ -1,0 +1,170 @@
+@use 'Colors';
+
+.AddWorkoutPage {
+  input[type="text"], label {
+    margin: 5px;
+    font-size: 25px;
+  }
+
+  input[type="text"] {
+    width: 320px;
+  }
+
+  .selected-exercises-container {
+    padding: 20px;
+    max-width: 75vh;
+    margin: auto;
+    margin-top: 50px;
+
+    .exercise-card {
+      margin: 10px;
+      background-color: Colors.$background-color-light;
+      border-radius: 25px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      text-transform: capitalize;
+      display: flex;
+      
+      .exercise-card-image {
+        img {
+          width: 100px;
+          height: 100px;
+          margin: 10px;
+          border-radius: 50px;
+        }
+      }
+      
+      .exercise-card-title {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        span {
+          font-size: 25px;
+          margin: 5px;
+          font-weight: bold;
+        }
+      }
+    
+      .exercise-card-order-controls {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: auto;
+        text-align: center;
+        color: Colors.$text-color;
+        padding-right: 20px;
+        button {
+          background-color: transparent;
+          border: none;
+          color: Colors.$text-color;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  .add-exercise-button {
+    border: none;
+    background-color: transparent;
+    color: Colors.$primary-color;
+    margin: 10px;
+    float: right;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.exercise-selection-modal {
+  .modal-body {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    max-height: 60vh;
+    overflow-y: scroll;
+  }
+
+  .modal-footer {
+    button {
+      background-color: transparent;
+      border: none;
+      padding: 10px;
+      font-size: 25px;
+      border-radius: 17px;
+      color: Colors.$background-color-light;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .selectable-option {
+    border-bottom: 1px solid black;
+    display: flex;
+    text-transform: capitalize;
+
+    .exercise-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 25px;
+
+      p {
+        margin: 0px;
+
+        &.exercise-name {
+          font-weight: bold;
+          font-size: 25px;
+        }
+
+        &.exercise-target {
+          font-weight: normal;
+          font-size: 15px;
+        }
+      }
+  
+    }
+
+    .selection-indicator {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: auto;
+    }
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #eaeaea;
+    }
+
+    .check {
+      opacity: 0%;
+      width: 30px;
+      height: 30px;
+      color: Colors.$green;
+    }
+
+    &.selected {
+      background-color: Colors.$primary-color;
+      font-weight: bold;
+      .check {
+        opacity: 100%;
+      }
+    }
+
+    img {
+      height: 75px;
+      width: 75px;
+      border-radius: 50px;
+    }
+
+    span {
+      margin: 10px;
+    }
+    padding: 15px;
+
+  }
+}
