@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const {exerciseRoutes} = require('./routes/');
 // Tells express to use static files from /dist
