@@ -22,7 +22,7 @@ function dbDown() {
     if (err) {
       console.log(err);
     } else {
-      console.log("Dopped all tables 💣");
+      console.log("Dropped all tables 💣");
     }
     process.exit();
   });
