@@ -21,7 +21,9 @@ function dbDown() {
   pool.query(fs.readFileSync(path.join(__dirname, "../src/server/queries/db-down/drop-all.sql")).toString(), (err, result) => {
     if (err) {
       console.log(err);
-      return;
+    } else {
+      console.log("Dopped all tables 💣");
     }
+    process.exit();
   });
 }
