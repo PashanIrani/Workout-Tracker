@@ -7,7 +7,7 @@ import { IoMdAddCircle, IoMdArrowDropupCircle, IoMdArrowDropdownCircle } from 'r
 
 const AddWorkout = () => {
     const  [allExercises, setAllExercises] = useState([]); // holds all exercises
-    const  [selectedExercise, setSelectedExercise] = useState(''); // holds all exercises 
+    const  [selectedExercise, setSelectedExercise] = useState(''); // holds selected exercises 
     const  [workoutTitle, setWorkoutTitle] = useState(''); // holds the title for the current workout plan being created
     const  [exercises, setExercises] = useState([]); // holdss the ids of the exercises that are added to the current workout plan
     const [showExerciseSelectionModal, setShowExerciseSelectionModal] = useState(false); // boolean value which determins if the exercise selection modal is shown
