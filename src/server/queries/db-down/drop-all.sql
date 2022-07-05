@@ -1,1 +1,2 @@
 DROP TABLE Users;
+DROP TABLE Address;
