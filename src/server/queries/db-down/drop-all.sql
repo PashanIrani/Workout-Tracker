@@ -1,4 +1,4 @@
-DROP TABLE Users;
 DROP TABLE Address;
 DROP TABLE Sponsor;
 DROP TABLE Workout;
+DROP TABLE Users;
