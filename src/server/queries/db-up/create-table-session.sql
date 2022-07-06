@@ -1,8 +1,7 @@
 CREATE TABLE session(
-	sessionID TEXT PRIMARY KEY,
-	Time DATE,
-	userID TEXT,
-	workoutID TEXT,
-	FOREIGN KEY (userID) REFERENCES users,
---	FOREIGN KEY (workoutID) REFERENCES WORKOUT
-)
+	session_id TEXT PRIMARY KEY,
+	session_time DATE,
+	user_id TEXT,
+	workout_id TEXT,
+	FOREIGN KEY (user_id) REFERENCES users
+);
