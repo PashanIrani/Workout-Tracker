@@ -1,0 +1,8 @@
+CREATE TABLE FAT_PERCENTAGE(
+	user_id TEXT NOT NULL,
+	bodylog_id TEXT NOT NULL,
+	time DATE NOT NULL,
+	percentage INTEGER NOT NULL,
+	PRIMARY KEY (user_id, bodylog_id),
+	FOREIGN KEY (user_id) REFERENCES USERS
+);
