@@ -1,0 +1,8 @@
+CREATE TABLE WEIGHT_LOG(
+	user_id TEXT NOT NULL,
+	bodylog_id TEXT NOT NULL,
+	time DATE NOT NULL,
+	weight INTEGER NOT NULL,
+	PRIMARY KEY (user_id, bodylog_id),
+	FOREIGN KEY (user_id) REFERENCES USERS
+);
