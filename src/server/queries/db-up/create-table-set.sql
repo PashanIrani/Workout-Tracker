@@ -1,10 +1,10 @@
 CREATE TABLE set(
-	setID  TEXT PRIMARY KEY,
-	weight DOUBLE,
+	set_id  TEXT PRIMARY KEY,
+	weight DECIMAL,
 	reps INTEGER,
-	exerciseID TEXT,
-	sessionID TEXT,
-	order INTEGER,
-	FOREIGN KEY (exerciseID) REFERENCES exercise,
-	FOREIGN KEY (sessionID) REFERENCES session
+	exercise_id TEXT,
+	session_id TEXT,
+	set_order INTEGER,
+	FOREIGN KEY (exercise_id) REFERENCES exercise,
+	FOREIGN KEY (session_id) REFERENCES session
     );

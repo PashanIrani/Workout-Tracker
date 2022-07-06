@@ -1,5 +1,5 @@
 CREATE TABLE gym (
-	gymID TEXT PRIMARY KEY,
+	gym_id TEXT PRIMARY KEY,
 	Name TEXT,
 	Street_address TEXT,
 	Postal_code TEXT,
