@@ -3,7 +3,10 @@ const fs = require("fs");
 const path = require("path");
 
 // SQL Files to run in-order
-const FILES = ["create-table-user.sql", "create-table-address.sql"];
+const FILES = ["create-table-user.sql", 
+               "create-table-address.sql",
+               "create-table-sponsor.sql",
+               "create-table-workout.sql"];
 
 begin(0);
 
