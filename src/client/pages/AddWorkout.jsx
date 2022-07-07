@@ -24,7 +24,7 @@ const AddWorkout = () => {
         // convert array to object for fast lookups
         res.data.forEach(exercise => {
           if (count > 50) return; // TODO: find a way to render all exercises without a performance sacrifice
-          temp[exercise.id] = exercise;
+          temp[exercise.exercise_id] = exercise;
           count++;
         });
 
@@ -71,6 +71,15 @@ const AddWorkout = () => {
 
     }
 
+    const removeExercise = (index) => {
+      if (index < 0 || index >= exercises.length) return;
+
+      exercises.splice(index, 1);
+
+      setExercises([...exercises]);
+    }
+
+
     const saveWorkout = () => {
       const workout = {
         name: workoutTitle,
@@ -101,10 +110,10 @@ const AddWorkout = () => {
               <Modal.Body>
               {Object.keys(allExercises).map(key => allExercises[key]).map(e => {
                 return (<div 
-                  className={`selectable-option ${selectedExercise === e.id ? 'selected' : ''}`} 
-                  onClick={() => { setSelectedExercise(e.id); }}
-                  key={e.id}>
-                    <div><img src={e.gifUrl} alt={e.name}/></div>
+                  className={`selectable-option ${selectedExercise === e.exercise_id ? 'selected' : ''}`} 
+                  onClick={() => { setSelectedExercise(e.exercise_id); }}
+                  key={e.exercise_id}>
+                    <div><img src={e.gif_url} alt={e.name}/></div>
                     <div className="exercise-details">
                       <p className="exercise-name">{e.name}</p>
                       <p className="exercise-target">{e.target}</p>
@@ -127,11 +136,12 @@ const AddWorkout = () => {
                 let exercise = allExercises[e];
                 return (<div className="exercise-card" key={e}>
                   <div className="exercise-card-image">
-                  <img src={exercise.gifUrl} alt={exercise.name} />
+                  <img src={exercise.gif_url} alt={exercise.name} />
                   </div>
                   
                   <div className="exercise-card-title">
                     <span>{exercise.name}</span>
+                    <span onClick={() => removeExercise(index)} className="delete-button">remove</span>
                   </div>
                   
                   <div className="exercise-card-order-controls">

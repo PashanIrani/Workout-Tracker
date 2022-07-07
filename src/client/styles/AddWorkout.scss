@@ -10,6 +10,15 @@
     width: 320px;
   }
 
+  .delete-button {
+    font-size: 12px !important;
+    color: red;
+    
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
   .selected-exercises-container {
     padding: 20px;
     max-width: 75vh;
