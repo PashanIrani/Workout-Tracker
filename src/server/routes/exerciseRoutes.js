@@ -1,12 +1,17 @@
-const csv = require('csvtojson');
-const path = require('path');
+const csv = require("csvtojson");
+const path = require("path");
+const { pool } = require("../db");
 
-module.exports = app => {
-  app.get('/getAllExercises', (req, res) => {
-    csv()
-    .fromFile(path.join(__dirname, '../../../public/data/exercises.csv'))
-    .then((data)=>{
-        res.json(data)
-    })
+module.exports = (app) => {
+  app.get("/getAllExercises", (req, res) => {
+    pool.query("SELECT * FROM Exercise", (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+
+      res.json(result.rows);
+    });
   });
-}
+};
