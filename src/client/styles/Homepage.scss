@@ -1,0 +1,36 @@
+.Homepage {
+  .image-container, .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-container {
+    flex-direction: column;
+    padding: 50px 0px;
+
+    button, a {
+      align-self: center;
+    }
+
+    a {
+      margin-top: 10px;
+    }
+    
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 80px;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  #copyright {
+    position: fixed;
+    bottom: 0;
+    margin: auto;
+  }
+  
+}
