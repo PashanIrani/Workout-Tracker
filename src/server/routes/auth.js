@@ -1,12 +1,7 @@
 const bcrypt = require("bcrypt");
 const { pool } = require("../db");
-const { v4: uuid } = require("uuid");
-
-// Checks if value is a null-like value
-function isNully(value) {
-  value = value.trim();
-  return value === undefined || value === "" || value === null;
-}
+const uid = new (require("short-unique-id"))();
+const { isNully } = require("../helpers");
 
 // Validates info for account creation
 function validateAccountInfo(info) {
@@ -21,17 +16,16 @@ function validateAccountInfo(info) {
 
 module.exports = (app) => {
   app.post("/login", (req, res) => {
-
     // Ensure no values are null-like
     if (isNully(req.body.email) || isNully(req.body.password)) {
       res.status(401).send("Incorrect Data Provided!");
       return;
     }
 
-    // Find User by email to proceed accordingly 
+    // Find User by email to proceed accordingly
     pool.query("SELECT * FROM Users WHERE email = $1", [req.body.email], (err, result) => {
       const { rows } = result;
-      
+
       // If no rows; then there are no users with the provided email; end here.
       if (rows.length == 0) {
         res.status(401).send("No Such User.");
@@ -42,18 +36,18 @@ module.exports = (app) => {
 
       // Check passord with hashed value
       bcrypt.compare(req.body.password, user.password).then((result) => {
-
         // If password is correct
         if (result) {
           req.session.authenticated = true; // mark session as authenticated
 
           // store user info incase for future queries during this session
-          req.session.user = { 
+          req.session.user = {
+            id: user.user_id,
             email: user.email,
             name: user.name,
           };
-          
-          res.status(200).send("Correct Credentials!"); 
+
+          res.status(200).send("Correct Credentials!");
           return;
         }
 
@@ -63,7 +57,6 @@ module.exports = (app) => {
   });
 
   app.get("/logout", (req, res) => {
-
     // destroy session
     req.session.destroy((err) => {
       if (err) res.status(500).send("failed to logout");
@@ -88,12 +81,11 @@ module.exports = (app) => {
 
       // if there is no user with this email, add them to DB
       if (rows.length == 0) {
-
         // hash password, and store in DB
         bcrypt.hash(req.body.password, 10).then((hashedPassword) => {
           pool.query(
             "INSERT INTO Users (user_id, name, email, password) VALUES ($1, $2, $3, $4)",
-            [uuid(), req.body.name, req.body.email, hashedPassword],
+            [uid(), req.body.name, req.body.email, hashedPassword],
             (err, result) => {
               if (err) {
                 console.error(err);

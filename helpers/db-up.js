@@ -64,8 +64,6 @@ function populateExerciseTable() {
     csv()
       .fromFile(path.join(__dirname, "../public/data/exercises.csv"))
       .then((data) => {
-        console.log(data);
-
         let values = "";
 
         for (let i = 0; i < data.length; ++i) {

@@ -3,7 +3,7 @@ const path = require("path");
 const { pool } = require("../db");
 
 module.exports = (app) => {
-  app.get("/getAllExercises", (req, res) => {
+  app.get("/get-all-exercises", (req, res) => {
     pool.query("SELECT * FROM Exercise", (err, result) => {
       if (err) {
         console.error(err);

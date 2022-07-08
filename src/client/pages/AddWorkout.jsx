@@ -16,7 +16,7 @@ const AddWorkout = () => {
     
     // on create effect
     useEffect(() => {
-      axios.get('/getAllExercises')
+      axios.get('/get-all-exercises')
       .then(res => {
         let temp = {};
         
@@ -85,9 +85,13 @@ const AddWorkout = () => {
         name: workoutTitle,
         exercises: [...exercises]
       }
-
-      console.log(workout); 
-      // TODO: Save to DB
+     
+      axios.post('/save-workout', {workout}).then(() => {
+        location.href = '/App/';
+      }).catch((err) => {
+        alert('Something went wrong, see console');
+        console.error(err);
+      })
     }
 
     return isReady ? (
