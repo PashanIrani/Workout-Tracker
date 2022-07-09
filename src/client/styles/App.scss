@@ -19,3 +19,20 @@ input[type="text"], input[type="password"] {
   border-bottom: 1px solid Colors.$secondary-color;
   color: Colors.$text-color;
 }
+
+button {
+  background-color: Colors.$primary-color;
+  padding: 10px;
+  border: none;
+}
+
+a {
+  color: Colors.$url-white !important;
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    filter: brightness(0.85);
+  }
+}
