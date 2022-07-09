@@ -155,7 +155,7 @@ const AddWorkout = () => {
                 <div>
                   <select name="exerciseListFilter" id="exerciseListFilter" onChange={(e) => setExerciseListFilter(e.target.value)}>
                   <option value="all">All</option>
-                  {exerciseTargets.map(target => (<option key={target} value={target}>{target}</option>))}
+                  {exerciseTargets.map(target => (<option key={target} value={target}>{target.trim().split(" ").map(t => t[0].toUpperCase() + t.substring(1)).join(" ")}</option>))}
                   </select>
                 </div>
                 <FixedSizeList
