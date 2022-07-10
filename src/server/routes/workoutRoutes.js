@@ -18,12 +18,14 @@ module.exports = (app) => {
     const workout_id = uid();
 
     let values = "";
-    
+
     // prepare values for SQL statment
     for (let i = 0; i < workout.exercises.length; ++i) {
       let exercise_id = workout.exercises[i];
 
-      values += `('${workout_id}', '${exercise_id}', '${i + 1}')` + (i == workout.exercises.length - 1 ? ";" : ",");
+      values +=
+        `('${workout_id}', '${exercise_id}', '${i + 1}')` +
+        (i == workout.exercises.length - 1 ? ";" : ",");
     }
 
     const query =
@@ -39,22 +41,23 @@ module.exports = (app) => {
         return;
       }
 
-      res.status(200).send('Workout Added!');
+      res.status(200).send("Workout Added!");
     });
   });
 
   app.get("/retrieve-workouts", (req, res) => {
     const { user } = req.session;
-    pool.query("SELECT * FROM WORKOUT WHERE user_id = $1;", [user.id], (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send("SQL Error!");
-        return;
+    pool.query(
+      "SELECT * FROM WORKOUT WHERE user_id = $1;",
+      [user.id],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("SQL Error!");
+          return;
+        }
+        res.json(result.rows);
       }
-      res.json(result.rows);
-    });
-    
+    );
   });
-
-  
 };
