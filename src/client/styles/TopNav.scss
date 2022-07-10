@@ -3,6 +3,8 @@
 #topNav {
     background-color: Colors.$primary-color !important;
     margin-top: 0vh !important; 
+    display:flex;
+    
     color: Colors.$secondary-color !important;
     height: 60px;
 }
@@ -27,11 +29,14 @@ a.dropdown-item:hover{
 }
 
 .navElement{
+    color: black;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
     margin-left: 2vh;
     margin-right: 2vh;
     text-align: center;
-    color: Colors.$secondary-color ;
-    
 }
 
 .dropdown-item{
@@ -44,4 +49,19 @@ a.dropdown-item:hover{
 
 .dropdown-content{
     padding:5px
+}
+
+
+    
+
+span{
+    display:block;
+    color: black;
+    
+    &:hover{
+      color: white;
+}
+
+.navbar{
+    justify-content: space-around;
 }

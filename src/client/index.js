@@ -16,8 +16,7 @@ root.render(
     <Routes>
       <Route path="/App/" element={<AppWrapper><App /></AppWrapper>} />
       <Route path="/App/AddWorkout" element={<AppWrapper><AddWorkout /></AppWrapper>} />
-      <Route path="/App/MyWorkouts" element={<AppWrapper><MyWorkouts/></AppWrapper>}/>
-      <Route path="/App/Settings" element={<AppWrapper></AppWrapper>}/>
+      <Route path="/App/AllWorkouts" element={<AppWrapper></AppWrapper>}/>
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
