@@ -1,0 +1,71 @@
+@use 'Colors';
+
+.MyWorkoutsPage {
+    .selected-workouts-container {
+        padding: 20px;
+        max-width: 75vh;
+        margin: auto;
+        margin-top: 50px;
+
+        .workouts-card {
+            padding-left: 20px;
+            margin: 10px;
+            background-color: Colors.$background-color-light;
+            border-radius: 25px;
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            text-transform: capitalize;
+            display: flex;
+            transition-duration: 0.25s;
+            .workout-card-title {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+        
+                span {
+                  font-size: 25px;
+                  margin: 5px;
+                  font-weight: bold;
+                }
+              }
+            .exercise-title {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left:auto;
+            }
+        }
+        
+        .workouts-card:hover{
+            transform: scale(1.02);
+            box-shadow: 0px 0px 9px rgb(240, 231, 231);
+            color:white;
+        }
+
+        .my-buttons {
+            font-size: 12px !important;
+            color: red;
+            float:right;
+            padding-right:10px;
+            display:block;
+            flex-direction: column;
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+
+          .start-button {
+            font-size: 20px !important;
+            color: white;
+            float:right;
+            padding-right:10px;
+            display:block;
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+    }
+};

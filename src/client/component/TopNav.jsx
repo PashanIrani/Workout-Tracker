@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/TopNav.scss'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaUser, FaSignOutAlt } from 'react-icons/fa';
-
+import {IoHome} from 'react-icons/io5'
 class TopNav extends React.Component {
 
     logout() {
@@ -14,11 +14,11 @@ class TopNav extends React.Component {
     render() {
         return (
             <div>
-                <Navbar fixed="top" variant="light" id="topNav">
+                <Navbar fixed="bottom" variant="light" id="topNav">
                     <Nav>
-                        <Nav.Link className="navElement" as={Link} to="/App/">Home</Nav.Link>
+                        <Nav.Link className="navElement" as={Link} to="/App/"><IoHome/></Nav.Link>
                         <Nav.Link className="navElement" as={Link} to="/App/AddWorkout">Add New</Nav.Link>
-                        <Nav.Link className="navElement" as={Link} to="/App/AllWorkouts">My Workouts</Nav.Link>
+                        <Nav.Link className="navElement" as={Link} to="/App/MyWorkouts">My Workouts</Nav.Link>
                         <Nav.Link className="navElement" as={Link} to="/App/Settings">Settings</Nav.Link>
                         <DropdownButton id="dropdown-right"
                             title={<FaUser className="profileIcon" />}>

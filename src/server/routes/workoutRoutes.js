@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.post("/save-workout", (req, res) => {
     const { workout } = req.body;
     const { user } = req.session;
-
+    console.log(req.session);
 
     if (isNully(workout.name)) {
       res.status(401).send("Incorrect Data Provided!");
@@ -42,4 +42,19 @@ module.exports = (app) => {
       res.status(200).send('Workout Added!');
     });
   });
+
+  app.get("/retrieve-workouts", (req, res) => {
+    const { user } = req.session;
+    pool.query("SELECT * FROM WORKOUT WHERE user_id = $1;", [user.id], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      res.json(result.rows);
+    });
+    
+  });
+
+  
 };

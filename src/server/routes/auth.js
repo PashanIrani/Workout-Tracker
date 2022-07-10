@@ -25,7 +25,6 @@ module.exports = (app) => {
     // Find User by email to proceed accordingly
     pool.query("SELECT * FROM Users WHERE email = $1", [req.body.email], (err, result) => {
       const { rows } = result;
-
       // If no rows; then there are no users with the provided email; end here.
       if (rows.length == 0) {
         res.status(401).send("No Such User.");
@@ -102,4 +101,6 @@ module.exports = (app) => {
       }
     });
   });
+
+  
 };
