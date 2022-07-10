@@ -30,14 +30,22 @@ function begin(file_no) {
       ?.then(() => nextAction(file_no))
       ?.catch(() => actionError(file_no));
   } else {
-    runSqlFile(path.join(__dirname, `../src/server/queries/db-up/${FILES[file_no]}`))
+    runSqlFile(
+      path.join(__dirname, `../src/server/queries/db-up/${FILES[file_no]}`)
+    )
       .then(() => nextAction(file_no))
       .catch(() => actionError(file_no));
   }
 }
 
 function nextAction(file_no) {
-  console.log(`${typeof FILES[file_no] === "function" ? FILES[file_no].name : FILES[file_no]} ✅`);
+  console.log(
+    `${
+      typeof FILES[file_no] === "function"
+        ? FILES[file_no].name
+        : FILES[file_no]
+    } ✅`
+  );
   begin(file_no + 1);
 }
 
@@ -69,7 +77,9 @@ function populateExerciseTable() {
         for (let i = 0; i < data.length; ++i) {
           let { id, name, target, equipment, gifUrl } = data[i];
 
-          values += `('${id}', '${name}', '${target}', '${equipment}', '${gifUrl}')` + (i == data.length - 1 ? ";" : ",");
+          values +=
+            `('${id}', '${name}', '${target}', '${equipment}', '${gifUrl}')` +
+            (i == data.length - 1 ? ";" : ",");
         }
 
         const query = `INSERT INTO Exercise (exercise_id, name, target, equipment, gif_url) VALUES ${values}`;

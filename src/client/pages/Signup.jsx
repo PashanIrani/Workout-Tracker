@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import '../styles/Login-Signup.scss';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import "../styles/Login-Signup.scss";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -17,7 +17,7 @@ const SignUp = () => {
         password,
       })
       .then(() => {
-        location.href="/login?new"
+        location.href = "/login?new";
       })
       .catch((error) => {
         console.error(error);
@@ -26,15 +26,20 @@ const SignUp = () => {
   };
 
   const submit = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       createAccount();
     }
-  }
+  };
 
   return (
     <div className="Page Signup">
       <h1>Sign Up!</h1>
-      {errorMessage !== '' && (<p className="error-message"><AiOutlineCloseCircle onClick={() => setErrorMessage("")}/> {errorMessage}</p>)}
+      {errorMessage !== "" && (
+        <p className="error-message">
+          <AiOutlineCloseCircle onClick={() => setErrorMessage("")} />{" "}
+          {errorMessage}
+        </p>
+      )}
       <div className="form-container">
         <div>
           <label htmlFor="email">Name:</label>

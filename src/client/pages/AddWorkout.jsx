@@ -1,212 +1,264 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Modal } from "react-bootstrap";
-import '../styles/AddWorkout.scss'
-import { FaCheck } from 'react-icons/fa';
-import { IoMdAddCircle, IoMdArrowDropupCircle, IoMdArrowDropdownCircle } from 'react-icons/io';
-import { FixedSizeList } from 'react-window';
+import "../styles/AddWorkout.scss";
+import { FaCheck } from "react-icons/fa";
+import {
+  IoMdAddCircle,
+  IoMdArrowDropupCircle,
+  IoMdArrowDropdownCircle,
+} from "react-icons/io";
+import { FixedSizeList } from "react-window";
 
 const AddWorkout = () => {
-    const  [allExercises, setAllExercises] = useState([]); // holds all exercises
-    const  [selectedExercise, setSelectedExercise] = useState(''); // holds selected exercises 
-    const  [workoutTitle, setWorkoutTitle] = useState(''); // holds the title for the current workout plan being created
-    const  [exercises, setExercises] = useState([]); // holdss the ids of the exercises that are added to the current workout plan
-    const [showExerciseSelectionModal, setShowExerciseSelectionModal] = useState(false); // boolean value which determins if the exercise selection modal is shown
+  const [allExercises, setAllExercises] = useState([]); // holds all exercises
+  const [selectedExercise, setSelectedExercise] = useState(""); // holds selected exercises
+  const [workoutTitle, setWorkoutTitle] = useState(""); // holds the title for the current workout plan being created
+  const [exercises, setExercises] = useState([]); // holdss the ids of the exercises that are added to the current workout plan
+  const [showExerciseSelectionModal, setShowExerciseSelectionModal] =
+    useState(false); // boolean value which determins if the exercise selection modal is shown
 
-    const [exerciseList, setExerciseList] = useState([]); // The list of exercises shown when "add exercise is clicked"
-    const [exerciseListFilter, setExerciseListFilter] = useState('All'); // Determines which exercise to show.
-    const [exerciseTargets, setExerciseTargets] = useState([]); // Holds all the targets the exercises target
+  const [exerciseList, setExerciseList] = useState([]); // The list of exercises shown when "add exercise is clicked"
+  const [exerciseListFilter, setExerciseListFilter] = useState("All"); // Determines which exercise to show.
+  const [exerciseTargets, setExerciseTargets] = useState([]); // Holds all the targets the exercises target
 
-    const [isReady, setIsReady] = useState(false);
-    
-    // on create effect
-    useEffect(() => {
-      axios.get('/get-all-exercises')
-      .then(res => {
-        let temp = {};
-        
-        const targets = new Set();
-       
-        // convert array to object for fast lookups
-        res.data.forEach(exercise => {
-          temp[exercise.exercise_id] = exercise;
-          targets.add(exercise.target);
-        });
+  const [isReady, setIsReady] = useState(false);
 
-        setExerciseTargets(Array.from(targets));
-        setAllExercises(temp);
-        setIsReady(true);
+  // on create effect
+  useEffect(() => {
+    axios.get("/get-all-exercises").then((res) => {
+      let temp = {};
+
+      const targets = new Set();
+
+      // convert array to object for fast lookups
+      res.data.forEach((exercise) => {
+        temp[exercise.exercise_id] = exercise;
+        targets.add(exercise.target);
       });
-    }, []);
 
-     /* Updates exercise list based on filter */
-    useEffect(() => {
-     
-      let newList = [];
+      setExerciseTargets(Array.from(targets));
+      setAllExercises(temp);
+      setIsReady(true);
+    });
+  }, []);
 
-      for (let key of Object.keys(allExercises)) {
-        const e = allExercises[key];
-  
-        if (exerciseListFilter.toLowerCase().localeCompare('all') && exerciseListFilter.toLowerCase().localeCompare(e.target.toLowerCase()) !== 0) continue;
+  /* Updates exercise list based on filter */
+  useEffect(() => {
+    let newList = [];
 
-        newList.push(
-          <div
-            className={`selectable-option ${selectedExercise === e.exercise_id ? "selected" : ""}`}
-            onClick={() => {
-              setSelectedExercise(e.exercise_id);
-            }}
-            key={e.exercise_id}
-          >
-            <div className="image-container">
-              <img src={e.gif_url} alt={e.name} />
-            </div>
-            <div className="exercise-details">
-              <p className="exercise-name">{e.name}</p>
-              <p className="exercise-target">{e.target}</p>
-            </div>
-            <div className="selection-indicator">
-              <FaCheck className="check" />
-            </div>
+    for (let key of Object.keys(allExercises)) {
+      const e = allExercises[key];
+
+      if (
+        exerciseListFilter.toLowerCase().localeCompare("all") &&
+        exerciseListFilter
+          .toLowerCase()
+          .localeCompare(e.target.toLowerCase()) !== 0
+      )
+        continue;
+
+      newList.push(
+        <div
+          className={`selectable-option ${
+            selectedExercise === e.exercise_id ? "selected" : ""
+          }`}
+          onClick={() => {
+            setSelectedExercise(e.exercise_id);
+          }}
+          key={e.exercise_id}
+        >
+          <div className="image-container">
+            <img src={e.gif_url} alt={e.name} />
           </div>
-        );
-      }
+          <div className="exercise-details">
+            <p className="exercise-name">{e.name}</p>
+            <p className="exercise-target">{e.target}</p>
+          </div>
+          <div className="selection-indicator">
+            <FaCheck className="check" />
+          </div>
+        </div>
+      );
+    }
 
-      setExerciseList([...newList]);
-    }, [allExercises, selectedExercise, exerciseListFilter]);
+    setExerciseList([...newList]);
+  }, [allExercises, selectedExercise, exerciseListFilter]);
 
-    const addExerciseToWorkout = () => {
-      if (!selectedExercise) return; // do nothing if no exercise is selected
-      
-      if (!exercises.includes(selectedExercise)) setExercises([...exercises, selectedExercise]);
+  const addExerciseToWorkout = () => {
+    if (!selectedExercise) return; // do nothing if no exercise is selected
+
+    if (!exercises.includes(selectedExercise))
+      setExercises([...exercises, selectedExercise]);
+  };
+
+  const exerciseSelectionModalCloseCallback = () => {
+    setSelectedExercise("");
+    setShowExerciseSelectionModal(false);
+  };
+
+  const exerciseSelectionModalSaveCallback = () => {
+    addExerciseToWorkout();
+    exerciseSelectionModalCloseCallback();
+  };
+
+  const moveExerciseUp = (index) => {
+    if (index <= 0 || index >= exercises.length) return;
+
+    let temp = exercises[index - 1];
+    exercises[index - 1] = exercises[index];
+    exercises[index] = temp;
+
+    setExercises([...exercises]);
+  };
+
+  const moveExerciseDown = (index) => {
+    if (index < 0 || index >= exercises.length - 1) return;
+
+    let temp = exercises[index + 1];
+    exercises[index + 1] = exercises[index];
+    exercises[index] = temp;
+
+    setExercises([...exercises]);
+  };
+
+  const removeExercise = (index) => {
+    if (index < 0 || index >= exercises.length) return;
+
+    exercises.splice(index, 1);
+
+    setExercises([...exercises]);
+  };
+
+  const saveWorkout = () => {
+    const workout = {
+      name: workoutTitle,
+      exercises: [...exercises],
     };
 
-    const exerciseSelectionModalCloseCallback = () => {
-      setSelectedExercise('');
-      setShowExerciseSelectionModal(false);
-    }
-
-    const exerciseSelectionModalSaveCallback = () => {
-      addExerciseToWorkout();
-      exerciseSelectionModalCloseCallback(); 
-    }
-    
-    const moveExerciseUp = (index) => {
-      if (index <= 0 || index >= exercises.length) return;
-
-      let temp = exercises[index - 1];
-      exercises[index - 1] = exercises[index];
-      exercises[index] = temp;
-
-      setExercises([...exercises]);
-    }
-
-    const moveExerciseDown = (index) => {
-      if (index < 0 || index >= exercises.length - 1) return;
-
-      let temp = exercises[index + 1];
-      exercises[index + 1] = exercises[index];
-      exercises[index] = temp;
-
-      setExercises([...exercises]);
-
-    }
-
-    const removeExercise = (index) => {
-      if (index < 0 || index >= exercises.length) return;
-
-      exercises.splice(index, 1);
-
-      setExercises([...exercises]);
-    }
-
-
-    const saveWorkout = () => {
-      const workout = {
-        name: workoutTitle,
-        exercises: [...exercises]
-      }
-     
-      axios.post('/save-workout', {workout}).then(() => {
-        location.href = '/App/';
-      }).catch((err) => {
-        alert('Something went wrong, see console');
-        console.error(err);
+    axios
+      .post("/save-workout", { workout })
+      .then(() => {
+        location.href = "/App/";
       })
-    }
+      .catch((err) => {
+        alert("Something went wrong, see console");
+        console.error(err);
+      });
+  };
 
-    return isReady ? (
-      <div className="Page AddWorkoutPage">
-          <h2>Create a new workout... </h2>
-          <label>Title: </label>
-          <input type="text" value={workoutTitle} onChange={event => {setWorkoutTitle(event.target.value)}} placeholder="Please enter a workout title: "/>
-          <br/>
-          
-         
-          <Modal show={showExerciseSelectionModal} 
-            onHide={exerciseSelectionModalCloseCallback}
-            backdrop="static"
-            keyboard={false}
-            className="exercise-selection-modal">
-              <Modal.Header closeButton>
-                <Modal.Title>Select an Exercise to Add:</Modal.Title>
-              </Modal.Header>
+  return isReady ? (
+    <div className="Page AddWorkoutPage">
+      <h2>Create a new workout... </h2>
+      <label>Title: </label>
+      <input
+        type="text"
+        value={workoutTitle}
+        onChange={(event) => {
+          setWorkoutTitle(event.target.value);
+        }}
+        placeholder="Please enter a workout title: "
+      />
+      <br />
 
-              <Modal.Body>
-                <div>
-                  <select name="exerciseListFilter" id="exerciseListFilter" onChange={(e) => setExerciseListFilter(e.target.value)}>
-                  <option value="all">All</option>
-                  {exerciseTargets.map(target => (<option key={target} value={target}>{target.trim().split(" ").map(t => t[0].toUpperCase() + t.substring(1)).join(" ")}</option>))}
-                  </select>
-                </div>
-                <FixedSizeList
-                  className="lazy-list"
-                  height={350}
-                  itemCount={exerciseList.length}
-                  itemSize={100}
-                  width={300}
-                >{({index, style}) => {
-                  return (<div style={style}>{exerciseList[index]}</div>);
-                }}
-                </FixedSizeList>
+      <Modal
+        show={showExerciseSelectionModal}
+        onHide={exerciseSelectionModalCloseCallback}
+        backdrop="static"
+        keyboard={false}
+        className="exercise-selection-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Select an Exercise to Add:</Modal.Title>
+        </Modal.Header>
 
-              </Modal.Body>
-
-              <Modal.Footer>
-                <button onClick={exerciseSelectionModalSaveCallback}>Add</button>
-              </Modal.Footer>
-          </Modal>
-
-          <button className="add-exercise-button" onClick={() => setShowExerciseSelectionModal(true)}>Add Exercise <IoMdAddCircle /></button>
-          
-          <div className="selected-exercises-container">
-            {
-              exercises.map((e, index) => {
-                let exercise = allExercises[e];
-                return (<div className="exercise-card" key={e}>
-                  <div className="exercise-card-image">
-                  <img src={exercise.gif_url} alt={exercise.name} />
-                  </div>
-                  
-                  <div className="exercise-card-title">
-                    <span>{exercise.name}</span>
-                    <span onClick={() => removeExercise(index)} className="delete-button">remove</span>
-                  </div>
-                  
-                  <div className="exercise-card-order-controls">
-                    <button onClick={() => moveExerciseUp(index)}><IoMdArrowDropupCircle /></button>
-                    <span>{index + 1}</span>
-                    <button onClick={() => moveExerciseDown(index)}><IoMdArrowDropdownCircle /></button>
-                  </div>
-                  
-                  </div>)
-              })
-            }
+        <Modal.Body>
+          <div>
+            <select
+              name="exerciseListFilter"
+              id="exerciseListFilter"
+              onChange={(e) => setExerciseListFilter(e.target.value)}
+            >
+              <option value="all">All</option>
+              {exerciseTargets.map((target) => (
+                <option key={target} value={target}>
+                  {target
+                    .trim()
+                    .split(" ")
+                    .map((t) => t[0].toUpperCase() + t.substring(1))
+                    .join(" ")}
+                </option>
+              ))}
+            </select>
           </div>
-          
-          <button disabled={workoutTitle === '' || exercises.length === 0} onClick={saveWorkout}>Save Workout</button>
+          <FixedSizeList
+            className="lazy-list"
+            height={350}
+            itemCount={exerciseList.length}
+            itemSize={100}
+            width={300}
+          >
+            {({ index, style }) => {
+              return <div style={style}>{exerciseList[index]}</div>;
+            }}
+          </FixedSizeList>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <button onClick={exerciseSelectionModalSaveCallback}>Add</button>
+        </Modal.Footer>
+      </Modal>
+
+      <button
+        className="add-exercise-button"
+        onClick={() => setShowExerciseSelectionModal(true)}
+      >
+        Add Exercise <IoMdAddCircle />
+      </button>
+
+      <div className="selected-exercises-container">
+        {exercises.map((e, index) => {
+          let exercise = allExercises[e];
+          return (
+            <div className="exercise-card" key={e}>
+              <div className="exercise-card-image">
+                <img src={exercise.gif_url} alt={exercise.name} />
+              </div>
+
+              <div className="exercise-card-title">
+                <span>{exercise.name}</span>
+                <span
+                  onClick={() => removeExercise(index)}
+                  className="delete-button"
+                >
+                  remove
+                </span>
+              </div>
+
+              <div className="exercise-card-order-controls">
+                <button onClick={() => moveExerciseUp(index)}>
+                  <IoMdArrowDropupCircle />
+                </button>
+                <span>{index + 1}</span>
+                <button onClick={() => moveExerciseDown(index)}>
+                  <IoMdArrowDropdownCircle />
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
-    ) : (<p>Please wait...</p>);
-    
-}
+
+      <button
+        disabled={workoutTitle === "" || exercises.length === 0}
+        onClick={saveWorkout}
+      >
+        Save Workout
+      </button>
+    </div>
+  ) : (
+    <p>Please wait...</p>
+  );
+};
 
 export default AddWorkout;

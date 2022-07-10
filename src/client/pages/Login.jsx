@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import '../styles/Login-Signup.scss';
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import "../styles/Login-Signup.scss";
 import { getURLParams } from "../helpers";
 
 const Login = () => {
@@ -13,10 +13,10 @@ const Login = () => {
   useEffect(() => {
     const params = getURLParams();
     console.log(params);
-    if ('new' in params) {
+    if ("new" in params) {
       setSuccessMessage("Account Created! Please login to continue! 💪");
     }
-  },[]);
+  }, []);
 
   const performLogin = () => {
     axios
@@ -32,16 +32,21 @@ const Login = () => {
   };
 
   const submit = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       performLogin();
     }
-  }
+  };
 
   return (
     <div className="Page Login">
       <p className="success-message">{successMessage}</p>
       <h1>Login</h1>
-      {errorMessage !== '' && (<p className="error-message"><AiOutlineCloseCircle onClick={() => setErrorMessage("")}/> {errorMessage}</p>)}
+      {errorMessage !== "" && (
+        <p className="error-message">
+          <AiOutlineCloseCircle onClick={() => setErrorMessage("")} />{" "}
+          {errorMessage}
+        </p>
+      )}
       <div className="form-container">
         <div>
           <label htmlFor="email">Email:</label>
@@ -72,7 +77,7 @@ const Login = () => {
             }}
           />
         </div>
-        
+
         <div>
           <button onClick={performLogin}>Login</button>
         </div>
@@ -80,7 +85,6 @@ const Login = () => {
           <a href="/signup">Don't have an account? Sign up!</a>
         </div>
       </div>
-     
     </div>
   );
 };

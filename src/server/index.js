@@ -24,7 +24,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     name: "workouttracker",
     saveUninitialized: false,
-    resave: true
+    resave: true,
   })
 );
 
