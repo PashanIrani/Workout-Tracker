@@ -12,7 +12,7 @@ class LogoutNav extends React.Component{
         <div>
             <Navbar fixed = "top" variant="light" id="logoutNav">
             <Nav className = "logout">
-                        <Nav.Link className="navElement1" as={Link} to="Homepage/">  <RiLogoutBoxRFill size={45} >  </RiLogoutBoxRFill>  </Nav.Link>
+                        <a href="/logout">  <RiLogoutBoxRFill size={45} >  </RiLogoutBoxRFill>  </a>
                         </Nav>
                 </Navbar>
         </div>
