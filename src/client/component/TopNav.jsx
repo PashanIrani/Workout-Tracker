@@ -22,7 +22,6 @@ class TopNav extends React.Component {
                         <Nav.Link className="navElement" as={Link} to="/App/"> <span> <ImHome3  > </ImHome3>  </span> </Nav.Link>
                         <Nav.Link className="navElement" as={Link} to="/AllWorkouts/"> <span> <GrHistory></GrHistory> </span></Nav.Link>
                         <Nav.Link className="navElement" as={Link} to="/login/"><span><FaUser ></FaUser></span></Nav.Link>
-
                     </Nav>
                 </Navbar>
             </div>

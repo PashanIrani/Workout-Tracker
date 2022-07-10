@@ -37,8 +37,6 @@ a.dropdown-item:hover{
     margin-left: 2vh;
     margin-right: 2vh;
     text-align: center;
-    //color: Colors.$secondary-color;
-
 }
 
 .dropdown-item{
@@ -59,14 +57,9 @@ a.dropdown-item:hover{
 span{
     display:block;
     color: black;
-
-}
-span:hover{
     
-    color: white;
-    
-
-    
+    &:hover{
+      color: white;
 }
 
 .navbar{
