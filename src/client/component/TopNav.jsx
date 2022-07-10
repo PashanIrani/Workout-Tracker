@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/TopNav.scss'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaUser, FaSignOutAlt } from 'react-icons/fa';
-import {IoHome} from 'react-icons/io5';
 import {ImHome3} from 'react-icons/im';
 import {GrHistory} from 'react-icons/gr';
 
@@ -21,7 +20,7 @@ class TopNav extends React.Component {
                 <Navbar fixed="bottom" variant="light" id="topNav">
                     <Nav className = "navbar">
                         <Nav.Link className="navElement" as={Link} to="/App/"> <span> <ImHome3  > </ImHome3>  </span> </Nav.Link>
-                        <Nav.Link className="navElement" as={Link} to="/App/AddWorkout"> <span> <GrHistory></GrHistory> </span></Nav.Link>
+                        <Nav.Link className="navElement" as={Link} to="/AllWorkouts/"> <span> <GrHistory></GrHistory> </span></Nav.Link>
                         <Nav.Link className="navElement" as={Link} to="/login/"><span><FaUser ></FaUser></span></Nav.Link>
 
                     </Nav>

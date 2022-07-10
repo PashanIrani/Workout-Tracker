@@ -8,8 +8,10 @@ class App extends Component{
   render(){
     return(
         <div className="Page">
-        <TopNav></TopNav>
+        
           <h1>Workout Tracker 💪</h1>
+          <a href= "AddWorkout/"> Add Workout </a>
+          <a href= "AllWorkouts/"> All Workouts </a>
             <Outlet />
         </div>
         

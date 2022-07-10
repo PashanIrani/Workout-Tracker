@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../styles/Homepage.scss'
-import TopNav from "../component/TopNav";
+
 const Homepage = () => {
 
   return (
@@ -9,9 +9,8 @@ const Homepage = () => {
     
   
     <div className="Page Homepage">
-       <>
-       <TopNav></TopNav> 
-      </> 
+      
+      
       <h1>🏋️‍♀️ Werk It! 🏋️‍♀️</h1>
       <p>CMPT 354's workout app of choice!</p>
         
