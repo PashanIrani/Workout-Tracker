@@ -4,6 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/TopNav.scss'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaUser, FaSignOutAlt } from 'react-icons/fa';
+import {IoHome} from 'react-icons/io5';
+import {ImHome3} from 'react-icons/im';
+import {GrHistory} from 'react-icons/gr';
+
 
 class TopNav extends React.Component {
 
@@ -14,23 +18,12 @@ class TopNav extends React.Component {
     render() {
         return (
             <div>
-                <Navbar fixed="top" variant="light" id="topNav">
-                    <Nav>
-                        <Nav.Link className="navElement" as={Link} to="/App/">Home</Nav.Link>
-                        <Nav.Link className="navElement" as={Link} to="/App/AddWorkout">Add New</Nav.Link>
-                        <Nav.Link className="navElement" as={Link} to="/App/AllWorkouts">My Workouts</Nav.Link>
-                        <Nav.Link className="navElement" as={Link} to="/App/Settings">Settings</Nav.Link>
-                        <DropdownButton id="dropdown-right"
-                            title={<FaUser className="profileIcon" />}>
-                            <div className="dropdown-content">
-                                <Dropdown.Item >
-                                        <FaUser className="profileIcon" /> Profile
-                                </Dropdown.Item>
-                                <Dropdown.Item onClick={this.logout}>
-                                        <FaSignOutAlt className="signOutIcon" /> Sign Out
-                                </Dropdown.Item>
-                            </div>
-                        </DropdownButton>
+                <Navbar fixed="bottom" variant="light" id="topNav">
+                    <Nav className = "navbar">
+                        <Nav.Link className="navElement" as={Link} to="/App/"> <span> <ImHome3  > </ImHome3>  </span> </Nav.Link>
+                        <Nav.Link className="navElement" as={Link} to="/App/AddWorkout"> <span> <GrHistory></GrHistory> </span></Nav.Link>
+                        <Nav.Link className="navElement" as={Link} to="/login/"><span><FaUser ></FaUser></span></Nav.Link>
+
                     </Nav>
                 </Navbar>
             </div>

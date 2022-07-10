@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import '../styles/Homepage.scss'
-
+import TopNav from "../component/TopNav";
 const Homepage = () => {
 
   return (
+
+   
+    
+  
     <div className="Page Homepage">
+       <>
+       <TopNav></TopNav> 
+      </> 
       <h1>🏋️‍♀️ Werk It! 🏋️‍♀️</h1>
       <p>CMPT 354's workout app of choice!</p>
+        
 
       <div className="image-container">
         <img className="homepage-image" src="https://media1.giphy.com/media/Uno27COfoYlH2/giphy.gif?cid=ecf05e474b63yaefr0avpa0wywmvp93747213wtpbfps1ftg&rid=giphy.gif&ct=g" alt="welcome image" />
