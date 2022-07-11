@@ -8,7 +8,6 @@ module.exports = (app) => {
   app.post("/save-workout", (req, res) => {
     const { workout } = req.body;
     const { user } = req.session;
-    console.log(req.session);
 
     if (isNully(workout.name)) {
       res.status(401).send("Incorrect Data Provided!");
@@ -68,7 +67,6 @@ module.exports = (app) => {
   app.post("/edit-workout", (req, res) => {
     const { workout } = req.body;
     const { user } = req.session;
-    console.log(req.session);
 
     pool.query(`DELETE FROM PUBLIC.WORKOUT_EXERCISE WHERE WORKOUT_ID = '${workout.id}'`, (err,result)=> {
       if (err) {
