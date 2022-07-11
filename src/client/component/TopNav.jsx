@@ -3,10 +3,10 @@ import { Nav, Navbar, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/TopNav.scss";
 import { Link } from "react-router-dom";
-import { FaSearch, FaUser, FaSignOutAlt } from "react-icons/fa";
+import { FaUser, FaListUl } from "react-icons/fa";
 import { ImHome3 } from "react-icons/im";
 import { GrHistory } from "react-icons/gr";
-
+import { MdLibraryAdd } from "react-icons/md";
 class TopNav extends React.Component {
   logout() {
     location.href = "/logout";
@@ -34,6 +34,24 @@ class TopNav extends React.Component {
             <Nav.Link className="navElement" as={Link} to="/App/Profile">
               <span>
                 <FaUser></FaUser>
+              </span>
+            </Nav.Link>
+            <Nav.Link
+              className="navElement"
+              as={Link}
+              to="/App/AddWorkout"
+              onClick={() => {
+                window.history.pushState({}, "", "/App/AddWorkout");
+                history.go();
+              }}
+            >
+              <span>
+                <MdLibraryAdd />
+              </span>
+            </Nav.Link>
+            <Nav.Link className="navElement" as={Link} to="/App/MyWorkouts">
+              <span>
+                <FaListUl />
               </span>
             </Nav.Link>
           </Nav>

@@ -28,7 +28,6 @@ const MyWorkouts = () => {
         workout.exercises = resp.data;
         MyWorkouts.push(workout);
         if (MyWorkouts.length === res.data.length) {
-          console.log(MyWorkouts);
           setWorkouts(MyWorkouts);
           setIsReady(true);
         }
