@@ -23,9 +23,14 @@ const AddWorkout = () => {
   const [exerciseTargets, setExerciseTargets] = useState([]); // Holds all the targets the exercises target
 
   const [isReady, setIsReady] = useState(false);
-
+  const [isEditing, setIsEditing] = useState(false);
   // on create effect
   useEffect(() => {
+    if (history.state.exercises) {
+      setExercises(history.state.exercises);
+      setWorkoutTitle(history.state.workoutName);
+      setIsEditing(true);
+    }
     axios.get("/get-all-exercises").then((res) => {
       let temp = {};
 
@@ -130,12 +135,52 @@ const AddWorkout = () => {
     setExercises([...exercises]);
   };
 
+  const editWorkoutName = () => {
+    if (workoutTitle === history.state.workoutName) {
+      return;
+    }
+    const workout = {
+      name: workoutTitle,
+      id: history.state.workoutId,
+    };
+    axios
+      .post("/edit-workout-name", { workout })
+      .then(() => {
+        location.href = "/App/MyWorkouts/";
+      })
+      .catch((err) => {
+        alert("Something went wrong, see console");
+        console.error(err);
+      });
+  };
+
+  const editWorkout = () => {
+    if (exercises === history.state.exercises) {
+      location.href = "/App/MyWorkouts";
+      return;
+    }
+
+    const workout = {
+      exercises: [...exercises],
+      id: history.state.workoutId,
+    };
+
+    axios
+      .post("/edit-workout", { workout })
+      .then(() => {
+        location.href = "/App/MyWorkouts/";
+      })
+      .catch((err) => {
+        alert("Something went wrong, see console");
+        console.error(err);
+      });
+  };
+
   const saveWorkout = () => {
     const workout = {
       name: workoutTitle,
       exercises: [...exercises],
     };
-
     axios
       .post("/save-workout", { workout })
       .then(() => {
@@ -149,7 +194,11 @@ const AddWorkout = () => {
 
   return isReady ? (
     <div className="Page AddWorkoutPage">
-      <h2>Create a new workout... </h2>
+      {!isEditing ? (
+        <h2>Create a new workout... </h2>
+      ) : (
+        <h2>Editing workout...</h2>
+      )}
       <label>Title: </label>
       <input
         type="text"
@@ -251,7 +300,12 @@ const AddWorkout = () => {
 
       <button
         disabled={workoutTitle === "" || exercises.length === 0}
-        onClick={saveWorkout}
+        onClick={() => {
+          if (isEditing) {
+            editWorkoutName();
+            editWorkout();
+          } else saveWorkout();
+        }}
       >
         Save Workout
       </button>

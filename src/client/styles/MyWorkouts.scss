@@ -42,14 +42,18 @@
             box-shadow: 0px 0px 9px rgb(240, 231, 231);
             color:white;
         }
-
+        .button-group{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
         .my-buttons {
             font-size: 12px !important;
             color: red;
             float:right;
-            padding-right:10px;
             display:block;
             flex-direction: column;
+            text-align: right;
             &:hover {
               cursor: pointer;
               text-decoration: underline;
@@ -57,11 +61,13 @@
           }
 
           .start-button {
+            text-align: right;
             font-size: 20px !important;
             color: white;
             float:right;
             padding-right:10px;
             display:block;
+            flex-direction: column;
             &:hover {
               cursor: pointer;
               text-decoration: underline;
