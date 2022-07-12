@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
+import AddWorkout from "../pages/AddWorkout";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
 import { Col, Row } from "react-bootstrap";
+
 const WorkoutCard = (props) => {
   const [showExercises, setShowExercises] = useState(false);
   const [exerciseIds, setExerciseIds] = useState([]);
   const [isReady, setIsReady] = useState(false);
   const workout = props.workout;
+
+  const deleteWorkouts = () => {
+    console.log("clicked");
+    axios.post("/delete-workouts", { workout }).then(
+      (res) => {
+        console.log("deleted");
+        location.reload();
+      },
+      (error) => {
+        console.log("error");
+      }
+    );
+  };
   useEffect(() => {
     let ids = [];
     workout.exercises.forEach((exercise) => {
@@ -62,7 +77,9 @@ const WorkoutCard = (props) => {
             >
               Edit
             </span>
-            <span className="my-buttons">Delete</span>
+            <span className="my-buttons" onClick={deleteWorkouts}>
+              Delete
+            </span>
           </Col>
         )}
 
