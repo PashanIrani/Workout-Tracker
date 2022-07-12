@@ -9,6 +9,13 @@
   input[type="text"] {
     width: 320px;
   }
+  .scrollable-div {
+  height: 600px;
+  overflow: auto;
+  margin: 20px;
+  text-align: justify;
+  padding: 20px;
+}
 
   .delete-button {
     font-size: 12px !important;
