@@ -195,121 +195,123 @@ const AddWorkout = () => {
 
   return isReady ? (
     <div className="Page AddWorkoutPage">
-      {!isEditing ? (
-        <h2>Create a new workout... </h2>
-      ) : (
-        <h2>Editing workout...</h2>
-      )}
-      <label>Title: </label>
-      <input
-        type="text"
-        value={workoutTitle}
-        onChange={(event) => {
-          setWorkoutTitle(event.target.value);
-        }}
-        placeholder="Please enter a workout title: "
-      />
-      <br />
+      <div className="scrollable-div">
+        {!isEditing ? (
+          <h2>Create a new workout... </h2>
+        ) : (
+          <h2>Editing workout...</h2>
+        )}
+        <label>Title: </label>
+        <input
+          type="text"
+          value={workoutTitle}
+          onChange={(event) => {
+            setWorkoutTitle(event.target.value);
+          }}
+          placeholder="Please enter a workout title: "
+        />
+        <br />
 
-      <Modal
-        show={showExerciseSelectionModal}
-        onHide={exerciseSelectionModalCloseCallback}
-        backdrop="static"
-        keyboard={false}
-        className="exercise-selection-modal"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Select an Exercise to Add:</Modal.Title>
-        </Modal.Header>
+        <Modal
+          show={showExerciseSelectionModal}
+          onHide={exerciseSelectionModalCloseCallback}
+          backdrop="static"
+          keyboard={false}
+          className="exercise-selection-modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Select an Exercise to Add:</Modal.Title>
+          </Modal.Header>
 
-        <Modal.Body>
-          <div>
-            <select
-              name="exerciseListFilter"
-              id="exerciseListFilter"
-              onChange={(e) => setExerciseListFilter(e.target.value)}
-            >
-              <option value="all">All</option>
-              {exerciseTargets.map((target) => (
-                <option key={target} value={target}>
-                  {target
-                    .trim()
-                    .split(" ")
-                    .map((t) => t[0].toUpperCase() + t.substring(1))
-                    .join(" ")}
-                </option>
-              ))}
-            </select>
-          </div>
-          <FixedSizeList
-            className="lazy-list"
-            height={350}
-            itemCount={exerciseList.length}
-            itemSize={100}
-            width={300}
-          >
-            {({ index, style }) => {
-              return <div style={style}>{exerciseList[index]}</div>;
-            }}
-          </FixedSizeList>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <button onClick={exerciseSelectionModalSaveCallback}>Add</button>
-        </Modal.Footer>
-      </Modal>
-
-      <button
-        className="add-exercise-button"
-        onClick={() => setShowExerciseSelectionModal(true)}
-      >
-        Add Exercise <IoMdAddCircle />
-      </button>
-
-      <div className="selected-exercises-container">
-        {exercises.map((e, index) => {
-          let exercise = allExercises[e];
-          return (
-            <div className="exercise-card" key={e}>
-              <div className="exercise-card-image">
-                <img src={exercise.gif_url} alt={exercise.name} />
-              </div>
-
-              <div className="exercise-card-title">
-                <span>{exercise.name}</span>
-                <span
-                  onClick={() => removeExercise(index)}
-                  className="delete-button"
-                >
-                  remove
-                </span>
-              </div>
-
-              <div className="exercise-card-order-controls">
-                <button onClick={() => moveExerciseUp(index)}>
-                  <IoMdArrowDropupCircle />
-                </button>
-                <span>{index + 1}</span>
-                <button onClick={() => moveExerciseDown(index)}>
-                  <IoMdArrowDropdownCircle />
-                </button>
-              </div>
+          <Modal.Body>
+            <div>
+              <select
+                name="exerciseListFilter"
+                id="exerciseListFilter"
+                onChange={(e) => setExerciseListFilter(e.target.value)}
+              >
+                <option value="all">All</option>
+                {exerciseTargets.map((target) => (
+                  <option key={target} value={target}>
+                    {target
+                      .trim()
+                      .split(" ")
+                      .map((t) => t[0].toUpperCase() + t.substring(1))
+                      .join(" ")}
+                  </option>
+                ))}
+              </select>
             </div>
-          );
-        })}
-      </div>
+            <FixedSizeList
+              className="lazy-list"
+              height={350}
+              itemCount={exerciseList.length}
+              itemSize={100}
+              width={300}
+            >
+              {({ index, style }) => {
+                return <div style={style}>{exerciseList[index]}</div>;
+              }}
+            </FixedSizeList>
+          </Modal.Body>
 
-      <button
-        disabled={workoutTitle === "" || exercises.length === 0}
-        onClick={() => {
-          if (isEditing) {
-            editWorkoutName();
-            editWorkout();
-          } else saveWorkout();
-        }}
-      >
-        Save Workout
-      </button>
+          <Modal.Footer>
+            <button onClick={exerciseSelectionModalSaveCallback}>Add</button>
+          </Modal.Footer>
+        </Modal>
+
+        <button
+          className="add-exercise-button"
+          onClick={() => setShowExerciseSelectionModal(true)}
+        >
+          Add Exercise <IoMdAddCircle />
+        </button>
+
+        <div className="selected-exercises-container">
+          {exercises.map((e, index) => {
+            let exercise = allExercises[e];
+            return (
+              <div className="exercise-card" key={e}>
+                <div className="exercise-card-image">
+                  <img src={exercise.gif_url} alt={exercise.name} />
+                </div>
+
+                <div className="exercise-card-title">
+                  <span>{exercise.name}</span>
+                  <span
+                    onClick={() => removeExercise(index)}
+                    className="delete-button"
+                  >
+                    remove
+                  </span>
+                </div>
+
+                <div className="exercise-card-order-controls">
+                  <button onClick={() => moveExerciseUp(index)}>
+                    <IoMdArrowDropupCircle />
+                  </button>
+                  <span>{index + 1}</span>
+                  <button onClick={() => moveExerciseDown(index)}>
+                    <IoMdArrowDropdownCircle />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <button
+          disabled={workoutTitle === "" || exercises.length === 0}
+          onClick={() => {
+            if (isEditing) {
+              editWorkoutName();
+              editWorkout();
+            } else saveWorkout();
+          }}
+        >
+          Save Workout
+        </button>
+      </div>
     </div>
   ) : (
     <p>Please wait...</p>

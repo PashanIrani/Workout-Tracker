@@ -118,4 +118,20 @@ module.exports = (app) => {
       }
     );
   });
+
+  app.post("/delete-workouts", (req, res) => {
+    const { workout } = req.body;
+    pool.query(
+      "DELETE FROM WORKOUT WHERE workout_id = $1",
+      [workout.workout_id],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("SQL Error!");
+          return;
+        }
+        res.json(result.rows);
+      }
+    );
+  });
 };
