@@ -4,5 +4,5 @@ CREATE TABLE session(
 	user_id TEXT,
 	workout_id TEXT,
 	FOREIGN KEY (user_id) REFERENCES users,
-	FOREIGN KEY (workout_id) REFERENCES workout
+	FOREIGN KEY (workout_id) REFERENCES workout ON DELETE CASCADE
 );
