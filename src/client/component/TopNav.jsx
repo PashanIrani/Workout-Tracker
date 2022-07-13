@@ -14,7 +14,7 @@ class TopNav extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="top-nav-component">
         <Navbar fixed="bottom" variant="light" id="topNav">
           <Nav className="navbar">
             <Nav.Link className="navElement" as={Link} to="/App/">

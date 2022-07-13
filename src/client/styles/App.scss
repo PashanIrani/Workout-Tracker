@@ -24,6 +24,19 @@ button {
   background-color: Colors.$primary-color;
   padding: 10px;
   border: none;
+
+  &.secondary {
+    background-color: transparent;
+    color: Colors.$text-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      color: Colors.$subtle-color;
+    }
+  }
 }
 
 a {
@@ -35,4 +48,8 @@ a {
     font-weight: bold;
     filter: brightness(0.85);
   }
+}
+
+.helper-text {
+  color: Colors.$background-color;
 }

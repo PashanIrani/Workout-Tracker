@@ -10,8 +10,6 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
-const { exerciseRoutes, auth, workoutRoutes } = require("./routes/");
-
 // Tells express to use static files from /dist
 app.use("/dist", express.static(path.join(__dirname, "./../../dist/")));
 app.use(express.static(path.join(__dirname, "./../../public/")));
@@ -39,9 +37,17 @@ app.get("/App/*", isAuthenticated, serveIndex);
 app.get("/login", serveIndex);
 app.get("/signup", serveIndex);
 
+const {
+  exerciseRoutes,
+  auth,
+  workoutRoutes,
+  sessionRoutes,
+} = require("./routes/");
+
 // Connect Routes
 exerciseRoutes(app);
 workoutRoutes(app);
+sessionRoutes(app);
 auth(app);
 
 app.listen(PORT);

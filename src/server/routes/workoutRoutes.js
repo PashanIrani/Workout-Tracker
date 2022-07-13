@@ -67,7 +67,6 @@ module.exports = (app) => {
 
   app.post("/edit-workout", (req, res) => {
     const { workout } = req.body;
-    const { user } = req.session;
 
     pool.query(
       `DELETE FROM PUBLIC.WORKOUT_EXERCISE WHERE WORKOUT_ID = '${workout.id}'`,
