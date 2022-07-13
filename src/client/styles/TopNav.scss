@@ -1,74 +1,71 @@
 @use 'Colors';
 
-#topNav {
-    background-color: Colors.$primary-color !important;
-    margin-top: 0vh !important; 
-    display:flex;
-    
-    color: Colors.$secondary-color !important;
-    height: 60px;
-}
-
-#dropdown-right{
-    background-color: transparent;
-    color: Colors.$background-color;
-    border-color: Colors.$secondary-color;
-    margin-left: 4vh;
-}
-
-a.dropdown-item:hover{
-    background-color: Colors.$primary-color;
-    color: Colors.$secondary-color;
-}
-
-.dropdown-menu{
-    padding: 0;
-    background-color: Colors.$secondary-color;
-    border: 1px solid rgba(255,255,255,.5);
-    border-radius: .25rem;
-}
-
-.navElement{
-    color: black;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 2vh;
-    margin-right: 2vh;
-    text-align: center;
-}
-
-.navbar-expand .navbar-nav {
-    width: 100%;
-}
-
-.dropdown-item{
-    background-color: Colors.$background-color;
-    color: rgba(255,255,255,.5);
-    text-align: left;
-    padding-top:10px;
-    padding-bottom:10px;
-}
-
-.dropdown-content{
-    padding:5px
-}
-
-
-
-
-    
-
-span{
-    display:block;
-    color: black;
-    
-    &:hover{
-      color: white;
+.top-nav-component {
+    #topNav {
+        background-color: Colors.$primary-color !important;
+        margin-top: 0vh !important; 
+        display:flex;
+        
+        color: Colors.$secondary-color !important;
+        height: 60px;
     }
-}
 
-.navbar{
-    justify-content: space-around;
+    #dropdown-right{
+        background-color: transparent;
+        color: Colors.$background-color;
+        border-color: Colors.$secondary-color;
+        margin-left: 4vh;
+    }
+
+    a.dropdown-item:hover{
+        background-color: Colors.$primary-color;
+        color: Colors.$secondary-color;
+    }
+
+    .dropdown-menu{
+        padding: 0;
+        background-color: Colors.$secondary-color;
+        border: 1px solid rgba(255,255,255,.5);
+        border-radius: .25rem;
+    }
+
+    .navElement{
+        color: black;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        margin-left: 2vh;
+        margin-right: 2vh;
+        text-align: center;
+    }
+
+    .navbar-expand .navbar-nav {
+        width: 100%;
+    }
+
+    .dropdown-item{
+        background-color: Colors.$background-color;
+        color: rgba(255,255,255,.5);
+        text-align: left;
+        padding-top:10px;
+        padding-bottom:10px;
+    }
+
+    .dropdown-content{
+        padding:5px
+    }
+
+    span{
+        display:block;
+        color: black;
+        
+        &:hover{
+        color: white;
+        }
+    }
+
+    .navbar{
+        justify-content: space-around;
+    }
 }

@@ -7,6 +7,7 @@ import MyWorkouts from "./pages/MyWorkouts.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import SignUp from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import CurrentSession from "./pages/CurrentSession.jsx";
 import AppWrapper from "./AppWrapper.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -35,6 +36,14 @@ root.render(
         element={
           <AppWrapper>
             <MyWorkouts />
+          </AppWrapper>
+        }
+      />
+      <Route
+        path="/App/CurrentSession"
+        element={
+          <AppWrapper>
+            <CurrentSession />
           </AppWrapper>
         }
       />

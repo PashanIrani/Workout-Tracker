@@ -51,10 +51,11 @@ module.exports = (app) => {
       res.status(401).send("Incorrect Data Provided!");
       return;
     }
-    
+
     // update name if necessary
-    const query = `UPDATE PUBLIC.WORKOUT set name = '${workout.name}'`+
-    `where workout_id = '${workout.id}' and name <> '${workout.name}'`;
+    const query =
+      `UPDATE PUBLIC.WORKOUT set name = '${workout.name}'` +
+      `where workout_id = '${workout.id}' and name <> '${workout.name}'`;
     pool.query(query, (err, result) => {
       if (err) {
         console.error(err);
@@ -62,19 +63,21 @@ module.exports = (app) => {
         return;
       }
     });
-  })
+  });
 
   app.post("/edit-workout", (req, res) => {
     const { workout } = req.body;
-    const { user } = req.session;
 
-    pool.query(`DELETE FROM PUBLIC.WORKOUT_EXERCISE WHERE WORKOUT_ID = '${workout.id}'`, (err,result)=> {
-      if (err) {
-        console.error(err);
-        res.status(500).send("SQL Error!");
-        return;
+    pool.query(
+      `DELETE FROM PUBLIC.WORKOUT_EXERCISE WHERE WORKOUT_ID = '${workout.id}'`,
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("SQL Error!");
+          return;
+        }
       }
-    });
+    );
 
     let values = "";
 
@@ -87,7 +90,7 @@ module.exports = (app) => {
         (i == workout.exercises.length - 1 ? ";" : ",");
     }
 
-    const query = `INSERT INTO workout_exercise (workout_id, exercise_id, exercise_order) VALUES ${values}`
+    const query = `INSERT INTO workout_exercise (workout_id, exercise_id, exercise_order) VALUES ${values}`;
 
     pool.query(query, (err, result) => {
       if (err) {

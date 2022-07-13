@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
 import { Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 const WorkoutCard = (props) => {
   const [showExercises, setShowExercises] = useState(false);
   const [exerciseIds, setExerciseIds] = useState([]);
   const [isReady, setIsReady] = useState(false);
   const workout = props.workout;
+  const navigate = useNavigate();
+
   useEffect(() => {
     let ids = [];
     workout.exercises.forEach((exercise) => {
@@ -67,7 +70,14 @@ const WorkoutCard = (props) => {
         )}
 
         <Col span="2" className="button-group">
-          <span className="start-button">Start</span>
+          <span
+            onClick={() =>
+              navigate("/App/CurrentSession", { state: { workout } })
+            }
+            className="start-button"
+          >
+            Start
+          </span>
         </Col>
       </div>
     )

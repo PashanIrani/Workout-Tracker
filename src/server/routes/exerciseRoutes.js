@@ -1,5 +1,3 @@
-const csv = require("csvtojson");
-const path = require("path");
 const { pool } = require("../db");
 
 module.exports = (app) => {

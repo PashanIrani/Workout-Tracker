@@ -24,6 +24,7 @@ const AddWorkout = () => {
 
   const [isReady, setIsReady] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
   // on create effect
   useEffect(() => {
     if (history.state.exercises) {

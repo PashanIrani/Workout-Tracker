@@ -12,7 +12,7 @@ const Login = () => {
 
   useEffect(() => {
     const params = getURLParams();
-    console.log(params);
+
     if ("new" in params) {
       setSuccessMessage("Account Created! Please login to continue! 💪");
     }
@@ -22,7 +22,6 @@ const Login = () => {
     axios
       .post("/login", { email, password })
       .then((response) => {
-        console.log(response);
         location.href = "/App/"; // Redirect to main app
       })
       .catch((error) => {
