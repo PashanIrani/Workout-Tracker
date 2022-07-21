@@ -13,13 +13,18 @@ html {
   margin-top: 60px;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="number"], input[type="password"] {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid Colors.$secondary-color;
   color: Colors.$text-color;
 }
 
+.modal-dialog {
+  input {
+    color: black;
+  }
+}
 button {
   background-color: Colors.$primary-color;
   padding: 10px;

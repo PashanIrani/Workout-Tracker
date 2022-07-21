@@ -7,6 +7,7 @@ import MyWorkouts from "./pages/MyWorkouts.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import SignUp from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 import CurrentSession from "./pages/CurrentSession.jsx";
 import AppWrapper from "./AppWrapper.jsx";
 
@@ -44,6 +45,14 @@ root.render(
         element={
           <AppWrapper>
             <CurrentSession />
+          </AppWrapper>
+        }
+      />
+      <Route
+        path="/App/Profile"
+        element={
+          <AppWrapper>
+            <ProfilePage />
           </AppWrapper>
         }
       />
