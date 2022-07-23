@@ -11,6 +11,7 @@ html {
   min-height: 91vh;
   color: Colors.$text-color;
   margin-top: 60px;
+  padding-bottom: 70px !important;
 }
 
 input[type="text"], input[type="number"], input[type="password"] {
