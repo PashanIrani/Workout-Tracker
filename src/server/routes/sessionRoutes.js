@@ -44,4 +44,42 @@ module.exports = (app) => {
       res.status(200).send("Session Added!");
     });
   });
+
+  app.post("/get-session",(req,res)=> {
+    const {sessionId} = req.body;
+    const query = `SELECT s.workout_id, s.session_time, w.name 
+    FROM session as s INNER JOIN workout as w 
+    ON s.workout_id = w.workout_id
+    WHERE session_id = '${sessionId}'`;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+
+      res.json(result.rows);
+    });
+
+  })
+
+  app.post("/get-exercise-sets", (req,res)=> {
+    const {sessionId,exerciseId} = req.body;
+    const query = `SELECT 
+    weight, reps, set_order,exercise_id
+    FROM
+    public.set
+    WHERE session_id='${sessionId}' and exercise_id = '${exerciseId}'
+    ORDER BY set_order `;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      console.log(exerciseId);
+      console.log(result.rows);
+      res.json(result.rows);
+    });
+  });
 };
