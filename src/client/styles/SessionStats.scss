@@ -26,7 +26,19 @@
         }
         .sets-info{
             font-size:15px;
-            color:rgb(181, 181, 255)
+            color:rgb(181, 181, 255);
+            .set-order {
+                border: 1px Colors.$primary-color solid;
+                color: Colors.$primary-color;
+                border-radius: 50%;
+                width: 17px;
+                text-align: center;
+                padding: 2px;
+                align-self: center;
+                font-size:9px;
+                margin-right:8px;
+                display:inline-block;
+            }
         }
     }
 

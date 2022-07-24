@@ -7,20 +7,17 @@ import ExerciseSetsCard from "../component/ExerciseSetsCard";
 const CurrentSession = (props) => {
   const [sets, setSets] = useState({});
   const location = useLocation();
-  const { workout } = location.state ? location.state : props;
+  const { workout } = location.state;
 
   useEffect(() => {
     let temp = {};
     let exercise_map = {};
-    console.log(props.workout);
     for (let exercise of workout.exercises) {
       temp[exercise.exercise_id] = [];
       exercise_map[exercise.exercise_id] = exercise;
     }
 
     workout["exercise_map"] = exercise_map;
-    console.log(temp);
-    console.log(exercise_map);
     setSets(temp);
   }, []);
 
@@ -49,7 +46,7 @@ const CurrentSession = (props) => {
 
   return (
     <div className="Page CurrentSession">
-      {Object.keys(sets).map((key) => {
+      {Object.keys(sets).map((key,i) => {
         return (
           <ExerciseSetsCard
             key={key}
@@ -57,7 +54,7 @@ const CurrentSession = (props) => {
               sets[exercise_id] = newSets;
               setSets({ ...sets });
             }}
-            info={workout.exercise_map[key]}
+            info={workout.exercises[i]}
           />
         );
       })}

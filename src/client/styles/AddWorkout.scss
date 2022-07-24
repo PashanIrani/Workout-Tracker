@@ -1,6 +1,10 @@
 @use 'Colors';
 
 .AddWorkoutPage {
+  overflow: auto;
+  text-align: justify;
+  padding:25px;
+  padding-bottom: 70px;
   input[type="text"], label {
     margin: 5px;
     font-size: 25px;
@@ -9,13 +13,13 @@
   input[type="text"] {
     width: 320px;
   }
-  .scrollable-div {
-  height: 600px;
-  overflow: auto;
-  margin: 20px;
-  text-align: justify;
-  padding: 20px;
-}
+//   .scrollable-div {
+//   height: 600px;
+//   overflow: auto;
+//   margin: 20px;
+//   text-align: justify;
+//   padding: 20px;
+// }
 
   .delete-button {
     font-size: 12px !important;
