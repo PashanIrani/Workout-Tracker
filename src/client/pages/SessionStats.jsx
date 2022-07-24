@@ -56,7 +56,7 @@ const SessionStats = (props) => {
           <p>
             Time completed: <span className="text-muted">{sessionTime}</span>
           </p>
-          <p>Total weight: {totalWeight}</p>
+          <p>Total weight: {totalWeight} lbs</p>
           <p>Total sets: {setCount}</p>
           <div className="stats-card">
             {Object.keys(sets).map((key) => {
@@ -68,7 +68,7 @@ const SessionStats = (props) => {
                       return (
                         <div key={e.set_id} className="sets-info">
                           <span>
-                            {e.reps}reps x {e.weight}lbs
+                            <span className="set-order">{e.set_order}</span>{e.weight} lbs x {e.reps} reps
                           </span>
                         </div>
                       );
