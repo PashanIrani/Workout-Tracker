@@ -9,6 +9,7 @@ import SignUp from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import CurrentSession from "./pages/CurrentSession.jsx";
 import AppWrapper from "./AppWrapper.jsx";
+import SessionStats from "./pages/SessionStats.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -44,6 +45,14 @@ root.render(
         element={
           <AppWrapper>
             <CurrentSession />
+          </AppWrapper>
+        }
+      />
+      <Route
+        path="/App/SessionStats"
+        element={
+          <AppWrapper>
+            <SessionStats />
           </AppWrapper>
         }
       />

@@ -44,4 +44,64 @@ module.exports = (app) => {
       res.status(200).send("Session Added!");
     });
   });
+
+  app.post("/get-session",(req,res)=> {
+    const {sessionId} = req.body;
+    const query = `SELECT s.workout_id, s.session_time, w.name 
+    FROM session as s INNER JOIN workout as w 
+    ON s.workout_id = w.workout_id
+    WHERE session_id = '${sessionId}'`;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      result.rows[0].session_time = result.rows[0].session_time.toLocaleString();
+      res.json(result.rows);
+    });
+
+  })
+
+  app.post("/get-session-sets", (req,res)=> {
+    const {sessionId,workoutId} = req.body;
+    const query = `SELECT we.name, we.exercise_order, we.exercise_id, 
+    s.weight, s.reps, s.set_order, s.set_id
+    from 
+    (SELECT e.name, w.exercise_order, w.exercise_id from
+     public.workout_exercise as w
+     INNER JOIN
+     public.exercise as e on w.exercise_id = e.exercise_id
+     where w.workout_id = '${workoutId}'
+     ) as we
+    INNER JOIN
+    public.set as s
+    on s.exercise_id = we.exercise_id
+    where s.session_id='${sessionId}' 
+    order by we.exercise_order,s.set_order `;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      
+      res.json(result.rows);
+    });
+  });
+
+  app.post("/get-session-info", (req,res)=> {
+    const {sessionId} = req.body;
+    const query = `SELECT SUM(weight*reps) as total_weight, COUNT(*) as set_count 
+    from public.set where session_id = '${sessionId}'`;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      
+      res.json(result.rows);
+    });
+  });
 };
