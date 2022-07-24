@@ -22,7 +22,6 @@ const SessionStats = (props) => {
   }, []);
   const fetchSessionInfo = (sessionId) => {
     axios.post("/get-session-info", { sessionId }).then((resp) => {
-      console.log(resp.data);
       setTotalWeight(resp.data[0].total_weight);
       setSetCount(resp.data[0].set_count);
     });
@@ -42,7 +41,6 @@ const SessionStats = (props) => {
         }
       }
       if (j >= sets.length) {
-        console.log(temp);
         setSets(temp);
         setIsReady(true);
       }
