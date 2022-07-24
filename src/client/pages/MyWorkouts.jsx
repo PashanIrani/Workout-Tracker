@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
-import "../styles/AddWorkout.scss";
 import WorkoutCard from "../component/WorkoutCard";
 
 const MyWorkouts = () => {
@@ -23,8 +22,10 @@ const MyWorkouts = () => {
   };
   const retrieveExercises = (res) => {
     let MyWorkouts = [];
-    res.data.forEach((workout) => {
-      axios.post("/retrieve-workout-exercises", { workout }).then((resp) => {
+    for (let i = 0; i < res.data.length; i++) {
+      let workout = res.data[i];
+      let id = workout.workout_id;
+      axios.post("/retrieve-workout-exercises", { id }).then((resp) => {
         workout.exercises = resp.data;
         MyWorkouts.push(workout);
         if (MyWorkouts.length === res.data.length) {
@@ -32,7 +33,7 @@ const MyWorkouts = () => {
           setIsReady(true);
         }
       });
-    });
+    };
   };
 
   return isReady ? (

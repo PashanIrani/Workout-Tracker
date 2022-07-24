@@ -1,0 +1,33 @@
+@use 'Colors';
+
+.SessionStats {
+    margin-top:5px;
+    overflow: auto;
+    text-align: justify;
+    padding-bottom: 60px;
+    .stats-container {
+        padding: 20px;
+        max-width: 50vh;
+        margin: auto;
+        margin-top: 50px;
+        text-align:left;
+    }
+    .stats-card {
+        padding: 10px;
+        margin: 10px;
+        background-color: Colors.$background-color-light;
+        border-radius: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        .stats-card-inner{
+            margin:10px
+        }
+        .exercise-title{
+            font-size: 20px;
+        }
+        .sets-info{
+            font-size:15px;
+            color:rgb(181, 181, 255)
+        }
+    }
+
+}
