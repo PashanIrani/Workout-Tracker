@@ -104,4 +104,24 @@ module.exports = (app) => {
       res.json(result.rows);
     });
   });
+
+  // division query: find all exercises that are in all workouts
+  app.get("/get-fav-exercise",(req,res) => {
+    const query = `SELECT EXERCISE_ID, NAME FROM (
+      SELECT w.WORKOUT_ID, e.EXERCISE_ID, e.NAME 
+      FROM WORKOUT_EXERCISE as w
+      JOIN EXERCISE as e
+      ON w.exercise_id = e.exercise_id) as we
+      WHERE WORKOUT_ID IN (SELECT WORKOUT_ID FROM WORKOUT)
+      GROUP BY EXERCISE_ID, NAME
+      HAVING COUNT(*) = (SELECT COUNT(*) FROM WORKOUT)`;
+      pool.query(query, (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send("SQL Error!");
+          return;
+        }
+        res.json(result.rows);
+      });
+  })
 };
