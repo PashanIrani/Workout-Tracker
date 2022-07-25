@@ -42,12 +42,14 @@ const {
   auth,
   workoutRoutes,
   sessionRoutes,
+  bodyLogRoutes,
 } = require("./routes/");
 
 // Connect Routes
 exerciseRoutes(app);
 workoutRoutes(app);
 sessionRoutes(app);
+bodyLogRoutes(app);
 auth(app);
 
 app.listen(PORT);
