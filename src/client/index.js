@@ -49,6 +49,16 @@ root.render(
           </AppWrapper>
         }
       />
+      
+      <Route
+        path="/App/SessionStats"
+        element={
+          <AppWrapper>
+            <SessionStats />
+          </AppWrapper>
+        }
+      />
+      
       <Route
         path="/App/Profile"
         element={
