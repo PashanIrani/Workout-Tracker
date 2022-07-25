@@ -13,10 +13,8 @@ const WorkoutCard = (props) => {
   const navigate = useNavigate();
 
   const deleteWorkouts = () => {
-    console.log("clicked");
     axios.post("/delete-workouts", { workout }).then(
       (res) => {
-        console.log("deleted");
         location.reload();
       },
       (error) => {

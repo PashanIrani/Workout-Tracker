@@ -9,6 +9,7 @@ const SessionStats = (props) => {
   const [sessionTime, setSessionTime] = useState("");
   const [totalWeight, setTotalWeight] = useState("");
   const [setCount, setSetCount] = useState("");
+  const [favExercise, setFavExercise] = useState("");
   const [isReady, setIsReady] = useState(false);
   useEffect(() => {
     const sessionId = new URLSearchParams(location.search).get("id");
@@ -18,8 +19,14 @@ const SessionStats = (props) => {
       setWorkoutName(data.name);
       fetchSessionInfo(sessionId);
       fetchExerciseSets(data.workout_id, sessionId);
+      fetchFavExercise();
     });
   }, []);
+  const fetchFavExercise = () => {
+    axios.get("/get-fav-exercise").then((resp) => {
+      setFavExercise(resp.data[0]);
+    });
+  };
   const fetchSessionInfo = (sessionId) => {
     axios.post("/get-session-info", { sessionId }).then((resp) => {
       setTotalWeight(resp.data[0].total_weight);
@@ -46,16 +53,24 @@ const SessionStats = (props) => {
       }
     });
   };
+
   return (
     isReady && (
       <div className="Page SessionStats">
         <div className="stats-container">
-          <h1>Session Summary: {workoutName}</h1>
+          <h1>
+            Session Summary: <span className="highlighted">{workoutName}</span>
+          </h1>
           <p>
             Time completed: <span className="text-muted">{sessionTime}</span>
           </p>
           <p>Total weight: {totalWeight} lbs</p>
           <p>Total sets: {setCount}</p>
+
+          <p>
+            Favourite exercise that is in all your workouts:{" "}
+            <span className="highlighted">{favExercise!=null?favExercise.name:'none'}</span>
+          </p>
           <div className="stats-card">
             {Object.keys(sets).map((key) => {
               return (
@@ -66,7 +81,8 @@ const SessionStats = (props) => {
                       return (
                         <div key={e.set_id} className="sets-info">
                           <span>
-                            <span className="set-order">{e.set_order}</span>{e.weight} lbs x {e.reps} reps
+                            <span className="set-order">{e.set_order}</span>
+                            {e.weight} lbs x {e.reps} reps
                           </span>
                         </div>
                       );
