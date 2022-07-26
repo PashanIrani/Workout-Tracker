@@ -10,9 +10,8 @@ class App extends Component {
   
   render() {
     // change this id here to the id in your db for testing
-    var id = "SuxAjh";
-    // change this to the id of the user
-    var userId = "qw3Pmq"
+    var id = "1xUiXF";
+
     return (
       <div className="Page">
         <h1>Workout Tracker 💪</h1>

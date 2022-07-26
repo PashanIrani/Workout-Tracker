@@ -11,12 +11,10 @@ const LoadSession = (props) =>{
     //const [sessionArray, setSessionArray] = useState([]);
 
     useEffect(()=>{
-        const userId = new URLSearchParams(location.search).get("id");
+    const userId = new URLSearchParams(location.search).get("id");
     axios.post("/get-all-sessions", { userId }).then((res) => {
       
       const data = res.data;
-      console.log("this is data: ");
-      console.log(data);
       for(let i =0; i< data.length;i++){
             console.log(i);
             console.log(data[i].workout_id);
