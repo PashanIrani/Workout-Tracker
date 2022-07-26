@@ -5,7 +5,10 @@ import LoadSession from "./LoadSession";
 import LogoutNav from "../component/LogoutNav.jsx";
 import { AiFillPlusCircle } from "react-icons/ai";
 class App extends Component {
+  
   render() {
+    // change this id here to the id in your db for testing
+    var id = "H1g2pg";
     return (
       <div className="Page Dashboard">
         <LogoutNav />
