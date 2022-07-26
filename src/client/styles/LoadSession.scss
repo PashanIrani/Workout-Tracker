@@ -1,45 +1,24 @@
 @use 'Colors';
 
-.SessionStats {
-    margin-top:5px;
-    overflow: auto;
-    text-align: justify;
-    padding-bottom: 10px;
-    .stats-container {
-        padding: 20px;
-        max-width: 50vh;
-        margin: auto;
-        margin-top: 50px;
-        text-align:left;
-    }
-    .stats-card {
-        padding: 10px;
-        margin: 10px;
-        background-color: Colors.$background-color-light;
-        border-radius: 25px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        .stats-card-inner{
-            margin:10px
-        }
-        .exercise-title{
-            font-size: 20px;
-        }
-        .sets-info{
-            font-size:15px;
-            color:rgb(181, 181, 255);
-            .set-order {
-                border: 1px Colors.$primary-color solid;
-                color: Colors.$primary-color;
-                border-radius: 50%;
-                width: 17px;
-                text-align: center;
-                padding: 2px;
-                align-self: center;
-                font-size:9px;
-                margin-right:8px;
-                display:inline-block;
-            }
-        }
-    }
 
+
+.session-card {
+    padding:10px;
+    background-color: Colors.$background-color-light;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width:50vh;
+    margin-top:10px;
+    &:hover {
+        cursor: pointer;
+    }
+    .workout-title{
+        color:Colors.$primary-color;
+    }
+    .session-date{
+        float:right;
+        color:grey;
+    }
+    
 }
+

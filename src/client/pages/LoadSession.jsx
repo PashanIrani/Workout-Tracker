@@ -1,41 +1,42 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
-import "../styles/SessionStats.scss";
+import "../styles/LoadSession.scss";
 
-const LoadSession = (props) =>{
+const LoadSession = (props) => {
+  const [workoutName, setWorkoutName] = useState([]);
+  const [workoutId, setWorkoutId] = useState([]);
+  const [sessionDate, setSessionDate] = useState([]);
+  const [sessionId, setSessionId] = useState([]);
 
-    const [workoutName, setWorkoutName] = useState([]);
-    const [workoutId, setWorkoutId] = useState([]);
-    const [sessionDate, setSessionDate] = useState([]);
-    //const [sessionArray, setSessionArray] = useState([]);
-
-    useEffect(()=>{
-    const userId = new URLSearchParams(location.search).get("id");
-    axios.post("/get-all-sessions", { userId }).then((res) => {
-      
+  useEffect(() => {
+    axios.post("/get-all-sessions").then((res) => {
       const data = res.data;
-      for(let i =0; i< data.length;i++){
-            console.log(i);
-            console.log(data[i].workout_id);
-            setWorkoutId(workoutId=>[...workoutId, data[i].workout_id]);
-            //console.log(workoutId[i]);
-            setSessionDate( sessionDate=>[...sessionDate,data[i].session_time]);
-            setWorkoutName(workoutName =>[...workoutName,data[i].name]);
+      for (let i = 0; i < data.length; i++) {
+        console.log(data);
+        setWorkoutId((workoutId) => [...workoutId, data[i].workout_id]);
+        setSessionId((sessionId) => [...sessionId, data[i].session_id]);
+        setSessionDate((sessionDate) => [...sessionDate, data[i].session_time]);
+        setWorkoutName((workoutName) => [...workoutName, data[i].name]);
       }
     });
-}, []);
+  }, []);
 
-return(
+  return (
     <div>
-        <div className="Page SessionStats"> 
-       <ul>
       {workoutId.map((value, index) => {
-        return <li className = "stats-card" onClick={()=>(location.href ='/App/SelectedSession')} key={index}>{workoutName[index]} on {sessionDate[index]} </li>
+        return (
+          <div
+            className="session-card"
+            onClick={() => (location.href=`/App/SessionStats?id=${sessionId[index]}`)}
+            key={index}
+          >
+            <span className="workout-title">{workoutName[index]}{" "}</span>
+            <span className="session-date"> {sessionDate[index]}</span>{" "}
+          </div>
+        );
       })}
-       </ul>
-     </div>
     </div>
-)
+  );
 };
 export default LoadSession;

@@ -106,10 +106,10 @@ module.exports = (app) => {
   });
 
   app.post("/get-all-sessions",(req,res)=>{
-    const user_id = req.session.user.id
-    console.log("lol look here is the user_id "+user_id);
-    const query = `SELECT s.session_time, s.workout_id, w.name 
-     FROM session as s INNER JOIN workout as w ON s.workout_id =w.workout_id WHERE s.user_id = '${user_id}'`;
+    const user_id = req.session.user.id;
+    const query = `SELECT s.session_time, s.workout_id, s.session_id, w.name 
+     FROM session as s INNER JOIN workout as w ON s.workout_id = w.workout_id WHERE s.user_id = '${user_id}'
+     order by s.session_time DESC`;
 
   
     pool.query(query,(err,result)=>{
@@ -118,7 +118,10 @@ module.exports = (app) => {
         res.status(500).send("SQL Error!");
         return;
       }
-
+      const {rows} = result;
+      for (let i = 0; i < rows.length; i++){
+        result.rows[i].session_time = result.rows[i].session_time.toLocaleString();
+      }
       res.json(result.rows)
     });
   });
