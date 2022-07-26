@@ -15,6 +15,10 @@ function validateAccountInfo(info) {
 }
 
 module.exports = (app) => {
+  app.get("/user-info", (req, res) => {
+    res.status(200).json({ ...req.session.user });
+  });
+
   app.post("/login", (req, res) => {
     // Ensure no values are null-like
     if (isNully(req.body.email) || isNully(req.body.password)) {

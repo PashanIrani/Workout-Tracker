@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import "../styles/Login-Signup.scss";
-import { getURLParams } from "../helpers";
+import helpers from "../helpers";
+
+const { getURLParams } = helpers;
 
 const Login = () => {
   const [email, setEmail] = useState("");

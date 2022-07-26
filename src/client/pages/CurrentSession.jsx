@@ -12,7 +12,6 @@ const CurrentSession = (props) => {
   useEffect(() => {
     let temp = {};
     let exercise_map = {};
-
     for (let exercise of workout.exercises) {
       temp[exercise.exercise_id] = [];
       exercise_map[exercise.exercise_id] = exercise;
@@ -48,7 +47,7 @@ const CurrentSession = (props) => {
 
   return (
     <div className="Page CurrentSession">
-      {Object.keys(sets).map((key) => {
+      {Object.keys(sets).map((key,i) => {
         return (
           <ExerciseSetsCard
             key={key}
@@ -56,7 +55,7 @@ const CurrentSession = (props) => {
               sets[exercise_id] = newSets;
               setSets({ ...sets });
             }}
-            info={workout.exercise_map[key]}
+            info={workout.exercises[i]}
           />
         );
       })}

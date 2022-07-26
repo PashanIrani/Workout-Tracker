@@ -11,7 +11,9 @@ html {
   min-height: 91vh;
   color: Colors.$text-color;
   margin-top: 60px;
+  padding-bottom: 70px !important;
 }
+
 .Dashboard {
   align-items: center;
   display: flex;
@@ -20,13 +22,20 @@ html {
     align-items: left;
   }
 }
-input[type="text"], input[type="password"] {
+
+
+input[type="text"], input[type="number"], input[type="password"] {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid Colors.$secondary-color;
   color: Colors.$text-color;
 }
 
+.modal-dialog {
+  input {
+    color: black;
+  }
+}
 button {
   margin:10px !important;
   background-color: Colors.$primary-color;
