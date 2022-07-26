@@ -16,16 +16,15 @@
         color: Colors.$primary-color;
     }
     .stats-card {
-        padding: 10px;
+        padding: 25px;
+        padding-top:5px;
         margin: 10px;
         background-color: Colors.$background-color-light;
         border-radius: 25px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        .stats-card-inner{
-            margin:10px
-        }
         .exercise-title{
             font-size: 20px;
+            margin-top:10px;
         }
         .sets-info{
             font-size:15px;

@@ -105,6 +105,26 @@ module.exports = (app) => {
     });
   });
 
+  // nested aggregation with group-by
+  app.post("/get-avg-weight",(req,res)=> {
+    const {sessionId} = req.body;
+    const query = `SELECT exercise_id,name, TRUNC(AVG(WEIGHT),2) avg_weight
+    FROM (SELECT e.exercise_id,e.name,s.weight,s.session_id
+         from exercise as e 
+         join set as s
+         on e.exercise_id = s.exercise_id) as se 
+         where se.session_id = '${sessionId}'
+    GROUP BY exercise_id,name`;
+    pool.query(query, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
+      res.json(result.rows);
+    });
+  })
+
   // division query: find all exercises that are in all workouts
   app.get("/get-fav-exercise",(req,res) => {
     const query = `SELECT EXERCISE_ID, NAME FROM (
