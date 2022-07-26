@@ -16,7 +16,21 @@ function validateAccountInfo(info) {
 
 module.exports = (app) => {
   app.get("/user-info", (req, res) => {
-    res.status(200).json({ ...req.session.user });
+    pool.query(
+      "SELECT * FROM Users where user_id = $1",
+      [req.session.user.id],
+      (err, result) => {
+        const { rows } = result;
+        // If no rows; then there are no users with the provided email; end here.
+        if (rows.length == 0) {
+          res.status(401).send("No Such User.");
+          return;
+        }
+
+        const { email, gym_id, name, user_id } = rows[0];
+        res.status(200).json({ email, gym_id, name, user_id });
+      }
+    );
   });
 
   app.post("/login", (req, res) => {

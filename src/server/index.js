@@ -43,9 +43,11 @@ const {
   workoutRoutes,
   sessionRoutes,
   bodyLogRoutes,
+  gymRoutes,
 } = require("./routes/");
 
 // Connect Routes
+gymRoutes(app);
 exerciseRoutes(app);
 workoutRoutes(app);
 sessionRoutes(app);

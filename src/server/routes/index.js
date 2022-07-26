@@ -3,6 +3,7 @@ const workoutRoutes = require("./workoutRoutes");
 const sessionRoutes = require("./sessionRoutes");
 const auth = require("./auth");
 const bodyLogRoutes = require("./bodyLogRoutes");
+const gymRoutes = require("./gymRoutes");
 
 module.exports = {
   exerciseRoutes,
@@ -10,4 +11,5 @@ module.exports = {
   workoutRoutes,
   sessionRoutes,
   bodyLogRoutes,
+  gymRoutes,
 };
