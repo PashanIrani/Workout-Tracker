@@ -10,6 +10,7 @@ const SessionStats = (props) => {
   const [totalWeight, setTotalWeight] = useState("");
   const [setCount, setSetCount] = useState("");
   const [favExercise, setFavExercise] = useState("");
+  const [avgWeightByExercise, setAvgWeightByExercise] = useState([]);
   const [isReady, setIsReady] = useState(false);
   useEffect(() => {
     const sessionId = new URLSearchParams(location.search).get("id");
@@ -19,6 +20,7 @@ const SessionStats = (props) => {
       setWorkoutName(data.name);
       fetchSessionInfo(sessionId);
       fetchExerciseSets(data.workout_id, sessionId);
+      fetchAvgWeight(sessionId);
       fetchFavExercise();
     });
   }, []);
@@ -27,6 +29,12 @@ const SessionStats = (props) => {
       setFavExercise(resp.data[0]);
     });
   };
+  const fetchAvgWeight = (sessionId) => {
+    axios.post("/get-avg-weight",{sessionId}).then((resp)=> {
+      console.log(resp.data);
+      setAvgWeightByExercise(resp.data);
+    })
+  }
   const fetchSessionInfo = (sessionId) => {
     axios.post("/get-session-info", { sessionId }).then((resp) => {
       setTotalWeight(resp.data[0].total_weight);
@@ -74,8 +82,7 @@ const SessionStats = (props) => {
           <div className="stats-card">
             {Object.keys(sets).map((key) => {
               return (
-                <div key={key} className="stats-card-inner">
-                  <div className="exercise-title">
+                  <div key={key} className="exercise-title">
                     {sets[key][0].name}
                     {sets[key].map((e) => {
                       return (
@@ -88,9 +95,19 @@ const SessionStats = (props) => {
                       );
                     })}
                   </div>
-                </div>
               );
             })}
+          </div>
+          <div className="stats-card">
+            <p className="exercise-title">Average weight per rep, by exercise:</p>
+            {avgWeightByExercise.map((e) => {
+                      return (
+                        <div key={e.exercise_id} className="sets-info">
+                            <span style={{color:"white"}}>{e.name}</span>
+                            <span style={{float:"right"}}>{e.avg_weight} lbs</span>
+                        </div>
+                      );
+                    })}
           </div>
         </div>
       </div>
