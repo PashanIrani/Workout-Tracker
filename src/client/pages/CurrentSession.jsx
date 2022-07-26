@@ -7,7 +7,7 @@ import ExerciseSetsCard from "../component/ExerciseSetsCard";
 const CurrentSession = (props) => {
   const [sets, setSets] = useState({});
   const location = useLocation();
-  const { workout } = location.state ? location.state : props;
+  const { workout } = location.state;
 
   useEffect(() => {
     let temp = {};
@@ -24,6 +24,7 @@ const CurrentSession = (props) => {
 
     workout["exercise_map"] = exercise_map;
     workout["exercise_order"] = exercise_order;
+    
     setSets(temp);
   }, []);
 
@@ -60,7 +61,7 @@ const CurrentSession = (props) => {
               sets[exercise_id] = newSets;
               setSets({ ...sets });
             }}
-            info={workout.exercise_map[key]}
+            info={workout.exercises[i]}
           />
         );
       })}
