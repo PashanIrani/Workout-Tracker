@@ -10,7 +10,7 @@ const SessionStats = (props) => {
   const [totalWeight, setTotalWeight] = useState("");
   const [setCount, setSetCount] = useState("");
   const [favExercise, setFavExercise] = useState("");
-  const [avgWeightByExercise, setAvgWeightByExercise] = useState([]);
+  const [maxAvgWeight, setMaxAvgWeight] = useState();
   const [isReady, setIsReady] = useState(false);
   useEffect(() => {
     const sessionId = new URLSearchParams(location.search).get("id");
@@ -19,8 +19,8 @@ const SessionStats = (props) => {
       setSessionTime(data.session_time);
       setWorkoutName(data.name);
       fetchSessionInfo(sessionId);
-      fetchExerciseSets(data.workout_id, sessionId);
       fetchAvgWeight(sessionId);
+      fetchExerciseSets(data.workout_id, sessionId);
       fetchFavExercise();
     });
   }, []);
@@ -30,11 +30,11 @@ const SessionStats = (props) => {
     });
   };
   const fetchAvgWeight = (sessionId) => {
-    axios.post("/get-avg-weight",{sessionId}).then((resp)=> {
+    axios.post("/get-max-avg-weight", { sessionId }).then((resp) => {
       console.log(resp.data);
-      setAvgWeightByExercise(resp.data);
-    })
-  }
+      setMaxAvgWeight(resp.data[0]);
+    });
+  };
   const fetchSessionInfo = (sessionId) => {
     axios.post("/get-session-info", { sessionId }).then((resp) => {
       setTotalWeight(resp.data[0].total_weight);
@@ -74,40 +74,37 @@ const SessionStats = (props) => {
           </p>
           <p>Total weight: {totalWeight} lbs</p>
           <p>Total sets: {setCount}</p>
-
+          <p>
+            Exercise with max average weight:{" "}
+            <span className="highlighted">
+              {maxAvgWeight.name} {"("}
+              {maxAvgWeight.max_weight} lbs{")"}
+            </span>
+          </p>
           <p>
             Favourite exercise that is in all your workouts:{" "}
-            <span className="highlighted">{favExercise!=null?favExercise.name:'none'}</span>
+            <span className="highlighted">
+              {favExercise != null ? favExercise.name : "none"}
+            </span>
           </p>
           <div className="stats-card">
             {Object.keys(sets).map((key) => {
               return (
-                  <div key={key} className="exercise-title">
-                    {sets[key][0].name}
-                    {sets[key].map((e) => {
-                      return (
-                        <div key={e.set_id} className="sets-info">
-                          <span>
-                            <span className="set-order">{e.set_order}</span>
-                            {e.weight} lbs x {e.reps} reps
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                <div key={key} className="exercise-title">
+                  {sets[key][0].name}
+                  {sets[key].map((e) => {
+                    return (
+                      <div key={e.set_id} className="sets-info">
+                        <span>
+                          <span className="set-order">{e.set_order}</span>
+                          {e.weight} lbs x {e.reps} reps
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               );
             })}
-          </div>
-          <div className="stats-card">
-            <p className="exercise-title">Average weight per rep, by exercise:</p>
-            {avgWeightByExercise.map((e) => {
-                      return (
-                        <div key={e.exercise_id} className="sets-info">
-                            <span style={{color:"white"}}>{e.name}</span>
-                            <span style={{float:"right"}}>{e.avg_weight} lbs</span>
-                        </div>
-                      );
-                    })}
           </div>
         </div>
       </div>
