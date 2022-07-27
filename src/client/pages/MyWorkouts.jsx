@@ -36,6 +36,7 @@ const MyWorkouts = () => {
   return (
     <div className="Page MyWorkoutsPage">
       <div className="selected-workouts-container">
+        <h1>My Workouts</h1>
         {workouts.length > 0 ? (
           workouts.map((e) => {
             return <WorkoutCard key={e.workout_id} workout={e} />;
