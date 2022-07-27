@@ -31,7 +31,6 @@ const SessionStats = (props) => {
   };
   const fetchAvgWeight = (sessionId) => {
     axios.post("/get-max-avg-weight", { sessionId }).then((resp) => {
-      console.log(resp.data);
       setMaxAvgWeight(resp.data[0]);
     });
   };
@@ -63,7 +62,7 @@ const SessionStats = (props) => {
   };
 
   return (
-    isReady && (
+    isReady && maxAvgWeight!=null && (
       <div className="Page SessionStats">
         <div className="stats-container">
           <h1>
