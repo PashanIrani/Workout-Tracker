@@ -5,7 +5,7 @@ import { BiMinusCircle } from "react-icons/bi";
 import { IoMdAddCircle } from "react-icons/io";
 
 const SetCard = (props) => {
-  let { weight, reps, index } = props;
+  let { weight, reps, index, id } = props;
 
   const [weightValue, setWeightValue] = useState(weight);
   const [repValue, setRepValue] = useState(reps);
@@ -17,6 +17,7 @@ const SetCard = (props) => {
 
   useEffect(() => {
     props.onUpdate({
+      id,
       weight: weightValue,
       reps: repValue,
     });
@@ -58,7 +59,7 @@ const SetCard = (props) => {
           <div className="input-label">Reps</div>
           <div className="input-value">
             <button
-              disabled={repValue === 0}
+              disabled={repValue === 1}
               className="secondary"
               onClick={() => {
                 updateValue(repValue, setRepValue, -1);
@@ -76,6 +77,10 @@ const SetCard = (props) => {
               <IoMdAddCircle />
             </button>
           </div>
+        </div>
+
+        <div>
+          <button onClick={() => props.onDelete(props.index)}>DELETE</button>
         </div>
       </div>
     </div>

@@ -3,12 +3,21 @@ const { pool } = require("../db");
 const uid = new (require("short-unique-id"))();
 const { isNully } = require("../helpers");
 
+// source: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
 // Validates info for account creation
 function validateAccountInfo(info) {
   const { name, email, password } = info;
 
   const nameStatus = !isNully(name);
-  const emailStatus = !isNully(email); // TODO: Check email format
+  const emailStatus = !isNully(email) && validateEmail(email);
   const passwordSatus = !isNully(password);
 
   return nameStatus && emailStatus && passwordSatus;
@@ -87,7 +96,13 @@ module.exports = (app) => {
 
   app.post("/create-account", (req, res) => {
     if (!validateAccountInfo(req.body)) {
-      res.status(401).send("Incorrect Data Provided!");
+      res
+        .status(401)
+        .send(
+          validateEmail(req.body.email)
+            ? "Incorrect Data Provided!"
+            : "Invalid Email!"
+        );
       return;
     }
 

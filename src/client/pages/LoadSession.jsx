@@ -23,18 +23,26 @@ const LoadSession = (props) => {
 
   return (
     <div>
-      {workoutId.map((value, index) => {
-        return (
-          <div
-            className="session-card"
-            onClick={() => (location.href=`/App/SessionStats?id=${sessionId[index]}`)}
-            key={index}
-          >
-            <span className="workout-title">{workoutName[index]}{" "}</span>
-            <span className="session-date"> {sessionDate[index]}</span>{" "}
-          </div>
-        );
-      })}
+      {workoutId.length > 0 ? (
+        workoutId.map((value, index) => {
+          return (
+            <div
+              className="session-card"
+              onClick={() =>
+                (location.href = `/App/SessionStats?id=${sessionId[index]}`)
+              }
+              key={index}
+            >
+              <span className="workout-title">{workoutName[index]} </span>
+              <span className="session-date"> {sessionDate[index]}</span>{" "}
+            </div>
+          );
+        })
+      ) : (
+        <p>
+          You have no previous workout sessions. Get off the couch and move!
+        </p>
+      )}
     </div>
   );
 };
