@@ -140,7 +140,10 @@ module.exports = (app) => {
     GROUP BY exercise_id,name`;
     pool.query(query, (err, result) => {
       if (err) {
-        
+        console.error(err);
+        res.status(500).send("SQL Error!");
+        return;
+      }
       res.json(result.rows);
     });
   });
