@@ -63,8 +63,7 @@ const SessionStats = (props) => {
 
   return (
     isReady &&
-    maxAvgWeight != null &&
-    favExercise != null && (
+    maxAvgWeight != null && (
       <div className="Page SessionStats">
         <div className="stats-container">
           <h1>
