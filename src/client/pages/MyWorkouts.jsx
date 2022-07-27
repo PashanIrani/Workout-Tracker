@@ -38,13 +38,15 @@ const MyWorkouts = () => {
     <div className="Page MyWorkoutsPage">
       <div className="selected-workouts-container">
         <h1>My Workouts</h1>
-        <button
-          className="secondary"
-          onClick={() => (window.location = "/App/AddWorkout")}
-        >
-          <MdAdd />
-          Create A New Workout
-        </button>
+        {workouts.length ? (
+          <button
+            className="secondary"
+            onClick={() => (window.location = "/App/AddWorkout")}
+          >
+            <MdAdd />
+            Create A New Workout
+          </button>
+        ) : null}
 
         {workouts.length > 0 ? (
           workouts.map((e) => {
