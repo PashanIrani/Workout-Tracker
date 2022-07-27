@@ -7,34 +7,32 @@
         margin: auto;
         margin-top: 50px;
 
-        .workouts-card {
-            padding-left: 20px;
-            margin: 10px;
-            background-color: Colors.$background-color-light;
+        .workouts-card-container {
+          background-color: Colors.$background-color-light;
             border-radius: 25px;
-            border-top-left-radius: 50px;
-            border-bottom-left-radius: 50px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             text-transform: capitalize;
+        }
+
+        .workouts-card-header {
             display: flex;
             transition-duration: 0.25s;
+            padding-left: 20px;
+            
             .workout-card-title {
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
-        
+                color: Colors.$primary-color;
+
                 span {
                   font-size: 25px;
                   margin: 5px;
                   font-weight: bold;
                 }
               }
-            .exercise-title {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-left:auto;
-            }
+            
         }
         
         .workouts-card:hover{
@@ -42,21 +40,39 @@
             box-shadow: 0px 0px 9px rgb(240, 231, 231);
             color:white;
         }
+
+        .exercises-container {
+          border-top: Colors.$subtle-color dashed 1px;
+          border-bottom: Colors.$subtle-color dashed 1px;
+          img {
+            width: 60px;
+            border-radius: 50%;
+            margin-right: 10px;
+          }
+
+          .exercise-title {
+            padding: 10px;
+          }
+
+        }
+
         .button-group{
           display: flex;
-          justify-content: center;
-          flex-direction: column;
+          justify-content: flex-end;
+          padding: 5px;
         }
         .my-buttons {
-            font-size: 12px !important;
-            color: red;
-            float:right;
+            font-size: 25px !important;
+            margin: 2px 5px;
+            color: white;
             display:block;
             flex-direction: column;
             text-align: right;
+
             &:hover {
               cursor: pointer;
               text-decoration: underline;
+              opacity: 0.5;
             }
           }
 
@@ -68,6 +84,8 @@
             padding-right:10px;
             display:block;
             flex-direction: column;
+            align-self: center;
+
             &:hover {
               cursor: pointer;
               text-decoration: underline;
