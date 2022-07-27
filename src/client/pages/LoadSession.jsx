@@ -39,7 +39,7 @@ const LoadSession = (props) => {
           );
         })
       ) : (
-        <p>
+        <p className="indicator">
           You have no previous workout sessions. Get off the couch and move!
         </p>
       )}

@@ -10,7 +10,7 @@ html {
   background-color: Colors.$background-color;
   min-height: 91vh;
   color: Colors.$text-color;
-  margin-top: 60px;
+  margin-top: 20px;
   padding-bottom: 70px !important;
 }
 
@@ -18,8 +18,19 @@ html {
   align-items: center;
   display: flex;
   flex-direction: column;
+
   .dashboard-container{
+    padding: 10px;
     align-items: left;
+  }
+
+  h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid Colors.$secondary-color;
+  }
+
+  .dashboard-content {
+    margin-top: 30px;
   }
 }
 
@@ -72,4 +83,8 @@ a {
 
 .helper-text {
   color: Colors.$background-color;
+}
+
+p.indicator {
+  color: Colors.$secondary-color;
 }

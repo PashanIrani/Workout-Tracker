@@ -10,13 +10,19 @@ class App extends Component {
     return (
       <div className="Page Dashboard">
         <div className="dashboard-container">
+          <p style={{ marginBottom: 0 }}>
+            The world famous CMPT 354 workout app
+          </p>
           <h1>Workout Tracker 💪</h1>
-          <button onClick={() => (location.href = "/App/MyWorkouts/")}>
-            Start Workout
-          </button>
 
-          <h3> Previous Sessions </h3>
-          <LoadSession></LoadSession>
+          <div className="dashboard-content">
+            <button onClick={() => (location.href = "/App/MyWorkouts/")}>
+              Start New Session
+            </button>
+
+            <h3> Previous Sessions </h3>
+            <LoadSession></LoadSession>
+          </div>
         </div>
         <Outlet />
       </div>

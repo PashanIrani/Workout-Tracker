@@ -4,22 +4,26 @@
   overflow: auto;
   text-align: justify;
   padding:25px;
+
+  @media only screen and (max-width: 370px) {
+    padding: 10px;
+  }
+
   padding-bottom: 70px;
+
+ 
   input[type="text"], label {
     margin: 5px;
     font-size: 25px;
+
+    @media only screen and (max-width: 370px) {
+      font-size: 15px;
+    }
   }
 
   input[type="text"] {
     width: 320px;
   }
-//   .scrollable-div {
-//   height: 600px;
-//   overflow: auto;
-//   margin: 20px;
-//   text-align: justify;
-//   padding: 20px;
-// }
 
   .delete-button {
     font-size: 18px !important;
@@ -30,6 +34,7 @@
       text-decoration: underline;
     }
   }
+
   .selected-exercises-container {
     padding: 20px;
     max-width: 75vh;
@@ -38,6 +43,7 @@
 
     .exercise-card {
       margin: 10px;
+      width: 100%;
       background-color: Colors.$background-color-light;
       border-radius: 25px;
       border-top-left-radius: 50px;
@@ -86,9 +92,40 @@
           font-size: 30px;
         }
       }
+
+      @media only screen and (max-width: 600px) {
+        .exercise-card-image {
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+
+        .exercise-card-title {
+
+          span {
+            font-size: 15px;
+          }
+        }
+
+        .exercise-card-order-controls {
+          padding-right: 10px;
+
+          button {
+            padding: 0;
+            margin: 0px !important;
+            font-size: 30px;
+          }
+        }
+      }
     }
   }
 
+  @media only screen and (max-width: 600px) {
+    .selected-exercises-container {
+      padding: 0%;
+    }
+  }
   .add-exercise-button {
     border: none;
     background-color: transparent;
