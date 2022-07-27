@@ -26,7 +26,7 @@ const SetCard = (props) => {
     <div className="SetCard">
       <div className="set-indicator">
         <span>Set</span>
-        <span>{index}</span>
+        <span>{index + 1}</span>
       </div>
 
       <div className="input-container">

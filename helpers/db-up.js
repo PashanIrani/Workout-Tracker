@@ -18,6 +18,10 @@ const FILES = [
   "create-table-session.sql",
   "create-table-set.sql",
   populateExerciseTable,
+  populateAddressTable,
+  populateGymTable,
+  populateSponsorTable,
+  populateTrainerTable,
 ];
 
 begin(0);
@@ -83,6 +87,130 @@ function populateExerciseTable() {
         }
 
         const query = `INSERT INTO Exercise (exercise_id, name, target, equipment, gif_url) VALUES ${values}`;
+
+        pool.query(query, (err, result) => {
+          if (err) {
+            console.log(`Error in ${path}: `);
+            console.log(err);
+            reject();
+            return;
+          }
+
+          resolve();
+        });
+      });
+  });
+}
+
+function populateAddressTable() {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(path.join(__dirname, "../public/data/address.csv"))
+      .then((data) => {
+        let values = "";
+
+        for (let i = 0; i < data.length; ++i) {
+          let { postal_code, city, province } = data[i];
+
+          values +=
+            `('${postal_code}', '${city}', '${province}')` +
+            (i == data.length - 1 ? ";" : ",");
+        }
+
+        const query = `INSERT INTO Address (postal_code, city, province) VALUES ${values}`;
+
+        pool.query(query, (err, result) => {
+          if (err) {
+            console.log(`Error in ${path}: `);
+            console.log(err);
+            reject();
+            return;
+          }
+
+          resolve();
+        });
+      });
+  });
+}
+
+function populateGymTable() {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(path.join(__dirname, "../public/data/gyms.csv"))
+      .then((data) => {
+        let values = "";
+
+        for (let i = 0; i < data.length; ++i) {
+          let { gym_id, name, street_address, postal_code } = data[i];
+
+          values +=
+            `('${gym_id}', '${name}', '${street_address}', '${postal_code}')` +
+            (i == data.length - 1 ? ";" : ",");
+        }
+
+        const query = `INSERT INTO Gym (gym_id, name, street_address, postal_code) VALUES ${values}`;
+
+        pool.query(query, (err, result) => {
+          if (err) {
+            console.log(`Error in ${path}: `);
+            console.log(err);
+            reject();
+            return;
+          }
+
+          resolve();
+        });
+      });
+  });
+}
+
+function populateSponsorTable() {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(path.join(__dirname, "../public/data/sponsor.csv"))
+      .then((data) => {
+        let values = "";
+
+        for (let i = 0; i < data.length; ++i) {
+          let { name, website_url } = data[i];
+
+          values +=
+            `('${name}', '${website_url}')` +
+            (i == data.length - 1 ? ";" : ",");
+        }
+
+        const query = `INSERT INTO Sponsor (name, website_url) VALUES ${values}`;
+
+        pool.query(query, (err, result) => {
+          if (err) {
+            console.log(`Error in ${path}: `);
+            console.log(err);
+            reject();
+            return;
+          }
+
+          resolve();
+        });
+      });
+  });
+}
+
+function populateTrainerTable() {
+  return new Promise((resolve, reject) => {
+    csv()
+      .fromFile(path.join(__dirname, "../public/data/trainer.csv"))
+      .then((data) => {
+        let values = "";
+
+        for (let i = 0; i < data.length; ++i) {
+          let { trainer_id, name, gym_id, sponsor } = data[i];
+
+          values +=
+            `('${trainer_id}', '${name}', '${gym_id}', '${sponsor}')` +
+            (i == data.length - 1 ? ";" : ",");
+        }
+
+        const query = `INSERT INTO Trainer (trainer_id, name, gym_id, sponsor) VALUES ${values}`;
 
         pool.query(query, (err, result) => {
           if (err) {

@@ -12,13 +12,19 @@ const CurrentSession = (props) => {
   useEffect(() => {
     let temp = {};
     let exercise_map = {};
+    let exercise_order = [];
+
+    workout.exercises.sort((a, b) => a.exercise_order - b.exercise_order);
+
     for (let exercise of workout.exercises) {
       temp[exercise.exercise_id] = [];
+      exercise_order.push(exercise.exercise_id);
       exercise_map[exercise.exercise_id] = exercise;
     }
 
     workout["exercise_map"] = exercise_map;
-
+    workout["exercise_order"] = exercise_order;
+   
     setSets(temp);
   }, []);
 
@@ -47,7 +53,7 @@ const CurrentSession = (props) => {
 
   return (
     <div className="Page CurrentSession">
-      {Object.keys(sets).map((key,i) => {
+      {workout["exercise_order"]?.map((key) => {
         return (
           <ExerciseSetsCard
             key={key}

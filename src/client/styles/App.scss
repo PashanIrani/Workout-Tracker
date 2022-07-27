@@ -52,6 +52,10 @@ button {
     &:disabled {
       color: Colors.$subtle-color;
     }
+
+    &.alternate {
+      color: Colors.$light-grey;
+    }
   }
 }
 
