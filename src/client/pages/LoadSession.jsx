@@ -13,7 +13,6 @@ const LoadSession = (props) => {
     axios.post("/get-all-sessions").then((res) => {
       const data = res.data;
       for (let i = 0; i < data.length; i++) {
-        console.log(data);
         setWorkoutId((workoutId) => [...workoutId, data[i].workout_id]);
         setSessionId((sessionId) => [...sessionId, data[i].session_id]);
         setSessionDate((sessionDate) => [...sessionDate, data[i].session_time]);
