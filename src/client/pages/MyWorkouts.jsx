@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
 import WorkoutCard from "../component/WorkoutCard";
+import { MdAdd } from "react-icons/md";
 
 const MyWorkouts = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -37,6 +38,14 @@ const MyWorkouts = () => {
     <div className="Page MyWorkoutsPage">
       <div className="selected-workouts-container">
         <h1>My Workouts</h1>
+        <button
+          className="secondary"
+          onClick={() => (window.location = "/App/AddWorkout")}
+        >
+          <MdAdd />
+          Create A New Workout
+        </button>
+
         {workouts.length > 0 ? (
           workouts.map((e) => {
             return <WorkoutCard key={e.workout_id} workout={e} />;
