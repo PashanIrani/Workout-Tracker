@@ -18,6 +18,7 @@ import { MdAdd } from "react-icons/md";
 import Avatar from "boring-avatars";
 import { SiReebok, SiNike, SiAdidas } from "react-icons/si";
 import { GoPencil } from "react-icons/go";
+import { RiRulerLine } from "react-icons/ri";
 
 const { Dates } = helpers;
 
@@ -149,14 +150,13 @@ const ProfilePage = () => {
     switch (state) {
       case LogState.BODY_WEIGHT:
         if (bodyWeightPoints.length > 0) {
-          defaultValue = bodyWeightPoints[bodyWeightPoints.length - 1].value;
+          defaultValue = bodyWeightPoints[bodyWeightPoints.length - 1].BW;
         }
         break;
 
       case LogState.FAT_PERCENTAGE:
         if (fatPercentagePoints.length > 0) {
-          defaultValue =
-            fatPercentagePoints[fatPercentagePoints.length - 1].value;
+          defaultValue = fatPercentagePoints[fatPercentagePoints.length - 1].FP;
         }
         break;
     }
@@ -240,12 +240,16 @@ const ProfilePage = () => {
             )}
           </span>
           <button className="secondary alternate" onClick={changeGymButton}>
-            <GoPencil /> Change
+            <GoPencil />
           </button>
         </p>
       </div>
+
       <div className="body-logs-section">
-        <h2>Body Logs</h2>
+        <h2>
+          <RiRulerLine />
+          Body Logs
+        </h2>
         <div className="body-logs-container">
           <div>
             <h4>Body Weight:</h4>
@@ -283,7 +287,8 @@ const ProfilePage = () => {
                       value: "lbs",
                       fill: "#8884d8",
                       angle: -90,
-                      offset: 15,
+                      offset: 0,
+                      position: "left",
                     }}
                   ></YAxis>
                 </LineChart>
@@ -330,10 +335,11 @@ const ProfilePage = () => {
                       Math.max(...fatPercentagePoints.map((point) => point.FP)),
                     ]}
                     label={{
-                      value: "lbs",
+                      value: "%",
                       fill: "#8884d8",
                       angle: -90,
-                      offset: 15,
+                      offset: 0,
+                      position: "left",
                     }}
                   ></YAxis>
                 </LineChart>
@@ -415,7 +421,7 @@ const ProfilePage = () => {
             {modalLabels.valueLabel}
             <input
               type="number"
-              value={value || 0}
+              value={value == null ? 0 : value}
               onInput={(e) => setValue(e.target.value)}
             />
             {modalLabels.valueSuffix}

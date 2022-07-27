@@ -95,6 +95,7 @@
     span:last-of-type {
       font-size: 50px;
     }
+
   }
 
   .input-container {
@@ -112,7 +113,17 @@
     }
   }
 
-  @media only screen and (max-width: 560px) {
+  .delete-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    button {
+      font-size: 50px;
+    }
+  }
+
+  @media only screen and (max-width: 650px) {
     flex-direction: column;
 
     .set-indicator {
@@ -128,6 +139,17 @@
         font-size: unset;
         padding-left: 7px;
       }
+
+      span.delete-button {
+        button {
+          margin: 0px !important;
+          padding: 0px;
+        }
+      }
+    }
+
+    .delete-button-container {
+      display: none;
     }
   }
 

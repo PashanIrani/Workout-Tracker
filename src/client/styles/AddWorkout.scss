@@ -23,12 +23,17 @@
 
   input[type="text"] {
     width: 320px;
+    max-width: 90vw;
   }
 
   .delete-button {
     font-size: 18px !important;
     color: red;
     
+    @media only screen and (max-width: 370px) {
+      font-size: 10px !important;
+    }
+
     &:hover {
       cursor: pointer;
       text-decoration: underline;

@@ -3,17 +3,27 @@ import { useEffect } from "react";
 import "../styles/CurrentSession.scss";
 import { BiMinusCircle } from "react-icons/bi";
 import { IoMdAddCircle } from "react-icons/io";
+import { MdDeleteForever } from "react-icons/md";
 
 const SetCard = (props) => {
   let { weight, reps, index, id } = props;
 
   const [weightValue, setWeightValue] = useState(weight);
   const [repValue, setRepValue] = useState(reps);
+  const [smallDeleteButton, setSmallDeleteButton] = useState(
+    window.matchMedia("(max-width: 650px)").matches
+  );
 
   const updateValue = (value, setter, increment) => {
     let newValue = value + increment;
     setter(newValue > 0 ? newValue : 0);
   };
+
+  useEffect(() => {
+    window
+      .matchMedia("(max-width: 650px)")
+      .addEventListener("change", (e) => setSmallDeleteButton(e.matches));
+  }, []);
 
   useEffect(() => {
     props.onUpdate({
@@ -28,6 +38,16 @@ const SetCard = (props) => {
       <div className="set-indicator">
         <span>Set</span>
         <span>{index + 1}</span>
+        {smallDeleteButton && (
+          <span className="delete-button">
+            <button
+              className="secondary"
+              onClick={() => props.onDelete(props.index)}
+            >
+              <MdDeleteForever />
+            </button>
+          </span>
+        )}
       </div>
 
       <div className="input-container">
@@ -79,8 +99,13 @@ const SetCard = (props) => {
           </div>
         </div>
 
-        <div>
-          <button onClick={() => props.onDelete(props.index)}>DELETE</button>
+        <div className="delete-button-container">
+          <button
+            className="secondary"
+            onClick={() => props.onDelete(props.index)}
+          >
+            <MdDeleteForever />
+          </button>
         </div>
       </div>
     </div>
