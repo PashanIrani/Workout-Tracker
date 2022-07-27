@@ -65,27 +65,23 @@ module.exports = (app) => {
 
   app.post("/get-session-sets", (req,res)=> {
     const {sessionId,workoutId} = req.body;
-    const query = `SELECT we.name, we.exercise_order, we.exercise_id, 
-    s.weight, s.reps, s.set_order, s.set_id
+    const query = `SELECT we.name, we.exercise_id, 
+    s.weight, s.reps, s.set_order, s.set_id,s.session_id
     from 
-    (SELECT e.name, w.exercise_order, w.exercise_id from
-     public.workout_exercise as w
-     INNER JOIN
-     public.exercise as e on w.exercise_id = e.exercise_id
-     where w.workout_id = '${workoutId}'
+    (SELECT name,exercise_id from
+     public.exercise 
      ) as we
-    INNER JOIN
+    JOIN
     public.set as s
     on s.exercise_id = we.exercise_id
     where s.session_id='${sessionId}' 
-    order by we.exercise_order,s.set_order `;
+    order by s.set_order `;
     pool.query(query, (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).send("SQL Error!");
         return;
       }
-      
       res.json(result.rows);
     });
   });
@@ -153,14 +149,15 @@ module.exports = (app) => {
 
   // division query: find all exercises that are in all workouts
   app.get("/get-fav-exercise",(req,res) => {
+    const user = req.session.user.id;
     const query = `SELECT EXERCISE_ID, NAME FROM (
       SELECT w.WORKOUT_ID, e.EXERCISE_ID, e.NAME 
       FROM WORKOUT_EXERCISE as w
       JOIN EXERCISE as e
       ON w.exercise_id = e.exercise_id) as we
-      WHERE WORKOUT_ID IN (SELECT WORKOUT_ID FROM WORKOUT)
+      WHERE WORKOUT_ID IN (SELECT WORKOUT_ID FROM WORKOUT where user_id = '${user}')
       GROUP BY EXERCISE_ID, NAME
-      HAVING COUNT(*) = (SELECT COUNT(*) FROM WORKOUT)`;
+      HAVING COUNT(*) = (SELECT COUNT(*) FROM WORKOUT where user_id = '${user}')`;
       pool.query(query, (err, result) => {
         if (err) {
           console.error(err);
