@@ -22,7 +22,7 @@
 // }
 
   .delete-button {
-    font-size: 12px !important;
+    font-size: 18px !important;
     color: red;
     
     &:hover {
@@ -47,11 +47,15 @@
       display: flex;
       
       .exercise-card-image {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
         img {
-          width: 100px;
-          height: 100px;
+          width: 160px;
+          height: 160px;
           margin: 10px;
-          border-radius: 50px;
+          border-radius: 50%;
         }
       }
       
