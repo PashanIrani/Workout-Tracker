@@ -129,15 +129,18 @@ module.exports = (app) => {
   });
 
   // nested aggregation with group-by
-  app.post("/get-avg-weight",(req,res)=> {
+  app.post("/get-max-avg-weight",(req,res)=> {
     const {sessionId} = req.body;
-    const query = `SELECT exercise_id,name, TRUNC(SUM(WEIGHT*REPS)/SUM(REPS),2) avg_weight
-    FROM (SELECT e.exercise_id,e.name,s.weight,s.reps,s.session_id
-         from exercise as e 
-         join set as s
-         on e.exercise_id = s.exercise_id) as se 
-         where se.session_id = '${sessionId}'
-    GROUP BY exercise_id,name`;
+    const query = `SELECT MAX(AVG_WEIGHT) as max_weight,name FROM(
+      SELECT name, TRUNC(SUM(WEIGHT*REPS)/SUM(REPS),2) avg_weight
+      FROM (SELECT e.name,s.weight,s.reps,s.session_id
+       from exercise as e 
+       join set as s
+       on e.exercise_id = s.exercise_id) as se 
+       where se.session_id = '${sessionId}'
+      GROUP BY se.name)AS W
+      group by w.name
+      order by max_weight DESC;`;
     pool.query(query, (err, result) => {
       if (err) {
         console.error(err);
