@@ -5,8 +5,7 @@ import "../styles/TopNav.scss";
 import { Link } from "react-router-dom";
 import { FaUser, FaListUl } from "react-icons/fa";
 import { ImHome3 } from "react-icons/im";
-import { GrHistory } from "react-icons/gr";
-import { MdLibraryAdd } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 class TopNav extends React.Component {
   logout() {
     location.href = "/logout";
@@ -18,41 +17,36 @@ class TopNav extends React.Component {
         <Navbar fixed="bottom" variant="light" id="topNav">
           <Nav className="navbar">
             <Nav.Link className="navElement" as={Link} to="/App/">
-              {" "}
               <span>
-                {" "}
-                <ImHome3> </ImHome3>{" "}
-              </span>{" "}
-            </Nav.Link>
-            <Nav.Link className="navElement" as={Link} to="/App/History/">
-              {" "}
-              <span>
-                {" "}
-                <GrHistory></GrHistory>{" "}
+                <ImHome3 />
               </span>
+              <span>Home</span>
             </Nav.Link>
+
             <Nav.Link className="navElement" as={Link} to="/App/Profile">
               <span>
-                <FaUser></FaUser>
+                <FaUser />
               </span>
+              <span>Profile</span>
             </Nav.Link>
-            <Nav.Link
-              className="navElement"
-              as={Link}
-              to="/App/AddWorkout"
-              onClick={() => {
-                window.history.pushState({}, "", "/App/AddWorkout");
-                history.go();
-              }}
-            >
-              <span>
-                <MdLibraryAdd />
-              </span>
-            </Nav.Link>
+
             <Nav.Link className="navElement" as={Link} to="/App/MyWorkouts">
               <span>
                 <FaListUl />
               </span>
+              <span>Workouts</span>
+            </Nav.Link>
+
+            <Nav.Link
+              className="navElement"
+              onClick={() => {
+                window.location = "/logout";
+              }}
+            >
+              <span>
+                <MdLogout />
+              </span>
+              <span>Logout</span>
             </Nav.Link>
           </Nav>
         </Navbar>

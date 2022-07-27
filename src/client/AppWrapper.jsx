@@ -4,7 +4,7 @@ import React from "react";
 const AppWrapper = (props) => {
   return (
     <div>
-      <TopNav /> 
+      <TopNav />
       {props.children}
     </div>
   );

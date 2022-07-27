@@ -38,10 +38,25 @@
         margin-left: 2vh;
         margin-right: 2vh;
         text-align: center;
+        flex-direction: column;
+
+        &:hover {
+            opacity: 0.5;
+            span {
+                font-weight: normal;
+            }
+        }
     }
 
     .navbar-expand .navbar-nav {
         width: 100%;
+
+        @media only screen and (max-width: 420px) {
+            & .nav-link {
+                padding: 0px;
+            }
+        }
+        
     }
 
     .dropdown-item{
@@ -60,9 +75,7 @@
         display:block;
         color: black;
         
-        &:hover{
-        color: white;
-        }
+       
     }
 
     .navbar{

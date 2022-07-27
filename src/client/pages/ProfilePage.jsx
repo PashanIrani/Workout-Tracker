@@ -415,7 +415,7 @@ const ProfilePage = () => {
             {modalLabels.valueLabel}
             <input
               type="number"
-              value={value}
+              value={value || 0}
               onInput={(e) => setValue(e.target.value)}
             />
             {modalLabels.valueSuffix}

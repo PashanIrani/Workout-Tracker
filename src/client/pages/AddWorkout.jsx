@@ -137,44 +137,53 @@ const AddWorkout = () => {
   };
 
   const editWorkoutName = () => {
-    if (workoutTitle === history.state.workoutName) {
-      return;
-    }
-    const workout = {
-      name: workoutTitle,
-      id: history.state.workoutId,
-    };
-    axios
-      .post("/edit-workout-name", { workout })
-      .then(() => {
-        location.href = "/App/MyWorkouts/";
-      })
-      .catch((err) => {
-        alert("Something went wrong, see console");
-        console.error(err);
-      });
+    return new Promise((resolve, reject) => {
+      if (workoutTitle === history.state.workoutName) {
+        resolve();
+        return;
+      }
+
+      const workout = {
+        name: workoutTitle,
+        id: history.state.workoutId,
+      };
+
+      axios
+        .post("/edit-workout-name", { workout })
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          alert("Something went wrong, see console");
+          console.error(err);
+          reject();
+        });
+    });
   };
 
   const editWorkout = () => {
-    if (exercises === history.state.exercises) {
-      location.href = "/App/MyWorkouts";
-      return;
-    }
+    return new Promise((resolve, reject) => {
+      if (exercises === history.state.exercises) {
+        resolve();
+        return;
+      }
 
-    const workout = {
-      exercises: [...exercises],
-      id: history.state.workoutId,
-    };
+      const workout = {
+        exercises: [...exercises],
+        id: history.state.workoutId,
+      };
 
-    axios
-      .post("/edit-workout", { workout })
-      .then(() => {
-        location.href = "/App/MyWorkouts/";
-      })
-      .catch((err) => {
-        alert("Something went wrong, see console");
-        console.error(err);
-      });
+      axios
+        .post("/edit-workout", { workout })
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => {
+          alert("Something went wrong, see console");
+          console.error(err);
+          reject();
+        });
+    });
   };
 
   const saveWorkout = () => {
@@ -304,8 +313,9 @@ const AddWorkout = () => {
           disabled={workoutTitle === "" || exercises.length === 0}
           onClick={() => {
             if (isEditing) {
-              editWorkoutName();
-              editWorkout();
+              editWorkoutName()
+                .then(editWorkout)
+                .then(() => (location.href = "/App/MyWorkouts/"));
             } else saveWorkout();
           }}
         >

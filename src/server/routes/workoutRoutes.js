@@ -56,12 +56,15 @@ module.exports = (app) => {
     const query =
       `UPDATE PUBLIC.WORKOUT set name = '${workout.name}'` +
       `where workout_id = '${workout.id}' and name <> '${workout.name}'`;
+
     pool.query(query, (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).send("SQL Error!");
         return;
       }
+
+      res.status(200).send("Workout Edited!");
     });
   });
 

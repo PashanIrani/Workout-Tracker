@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/MyWorkouts.scss";
 import WorkoutCard from "../component/WorkoutCard";
+import { MdAdd } from "react-icons/md";
 
 const MyWorkouts = () => {
   const [workouts, setWorkouts] = useState([]);
-  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     retrieveWorkouts();
@@ -30,22 +30,38 @@ const MyWorkouts = () => {
         MyWorkouts.push(workout);
         if (MyWorkouts.length === res.data.length) {
           setWorkouts(MyWorkouts);
-          setIsReady(true);
         }
       });
-    };
+    }
   };
-
-  return isReady ? (
+  return (
     <div className="Page MyWorkoutsPage">
       <div className="selected-workouts-container">
-        {workouts.map((e) => {
-          return <WorkoutCard key={e.workout_id} workout={e} />;
-        })}
+        <h1>My Workouts</h1>
+        {workouts.length ? (
+          <button
+            className="secondary"
+            onClick={() => (window.location = "/App/AddWorkout")}
+          >
+            <MdAdd />
+            Create A New Workout
+          </button>
+        ) : null}
+
+        {workouts.length > 0 ? (
+          workouts.map((e) => {
+            return <WorkoutCard key={e.workout_id} workout={e} />;
+          })
+        ) : (
+          <div>
+            <p>You have no created workouts. Please create a one!</p>
+            <button onClick={() => (window.location = "/App/AddWorkout")}>
+              Create A Workout
+            </button>
+          </div>
+        )}
       </div>
     </div>
-  ) : (
-    <p></p>
   );
 };
 
