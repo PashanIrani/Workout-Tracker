@@ -41,6 +41,7 @@ root.render(
           </AppWrapper>
         }
       />
+
       <Route
         path="/App/CurrentSession"
         element={
@@ -49,7 +50,7 @@ root.render(
           </AppWrapper>
         }
       />
-      
+
       <Route
         path="/App/SessionStats"
         element={
@@ -58,7 +59,7 @@ root.render(
           </AppWrapper>
         }
       />
-      
+
       <Route
         path="/App/Profile"
         element={
