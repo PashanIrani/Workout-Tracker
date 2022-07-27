@@ -61,7 +61,7 @@ const CurrentSession = (props) => {
               sets[exercise_id] = newSets;
               setSets({ ...sets });
             }}
-            info={workout.exercises[i]}
+            info={workout.exercise_map[key]}
           />
         );
       })}
