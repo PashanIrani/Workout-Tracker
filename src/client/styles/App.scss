@@ -14,6 +14,16 @@ html {
   padding-bottom: 70px !important;
 }
 
+.Dashboard {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  .dashboard-container{
+    align-items: left;
+  }
+}
+
+
 input[type="text"], input[type="number"], input[type="password"] {
   background-color: transparent;
   border: none;
@@ -27,10 +37,10 @@ input[type="text"], input[type="number"], input[type="password"] {
   }
 }
 button {
+  margin:10px !important;
   background-color: Colors.$primary-color;
   padding: 10px;
   border: none;
-
   &.secondary {
     background-color: transparent;
     color: Colors.$text-color;

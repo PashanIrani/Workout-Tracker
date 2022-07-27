@@ -1,0 +1,24 @@
+@use 'Colors';
+
+
+
+.session-card {
+    padding:10px;
+    background-color: Colors.$background-color-light;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width:50vh;
+    margin-top:10px;
+    &:hover {
+        cursor: pointer;
+    }
+    .workout-title{
+        color:Colors.$primary-color;
+    }
+    .session-date{
+        float:right;
+        color:grey;
+    }
+    
+}
+
