@@ -24,7 +24,7 @@ const CurrentSession = (props) => {
 
     workout["exercise_map"] = exercise_map;
     workout["exercise_order"] = exercise_order;
-    
+   
     setSets(temp);
   }, []);
 

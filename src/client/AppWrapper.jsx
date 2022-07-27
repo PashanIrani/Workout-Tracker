@@ -1,11 +1,10 @@
 import TopNav from "./component/TopNav.jsx";
-import LogoutNav from "./component/LogoutNav.jsx";
 import React from "react";
 
 const AppWrapper = (props) => {
   return (
     <div>
-      <TopNav /> <LogoutNav />
+      <TopNav /> 
       {props.children}
     </div>
   );
