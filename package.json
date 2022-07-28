@@ -6,11 +6,10 @@
   "scripts": {
     "start": "node ./src/server/index.js",
     "dev-start": "nodemon ./src/server/index.js",
-    "dev-build": "webpack --mode development",
+    "build": "webpack --mode development",
     "db-up": "node ./helpers/db-up.js",
     "db-down": "node ./helpers/db-down.js",
-    "reset-db": "npm run db-down && npm run db-up",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "reset-db": "npm run db-down && npm run db-up"
   },
   "repository": {
     "type": "git",
