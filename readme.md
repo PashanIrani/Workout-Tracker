@@ -12,8 +12,13 @@
 
 Side-Note: `npm run db-down` // To destroy DB
 
+## Preview Steps
+1. `npm run build` // Builds the project
+2. `npm run start` // Starts the project
+3. Visit `localhost:3000` on your browser
+
 ## Dev Steps 
-1. `npm run dev-build` // Builds client files into /dist/bundle.js and also watches for changes so it can rebuild without having to execute the command again.
+1. `npm run build` // Builds client files into /dist/bundle.js. To watch for changes set the param `watch` to `true` in webpack.config.js
  
 2. `npm run dev-start` // Starts server, and restarts server if files were changed
 
